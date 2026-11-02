@@ -1,0 +1,218 @@
+{
+  "name": "Encoder Control — Basic",
+  "shortname": "Encoder Control",
+  "description": "Basic encoder ticking preset — up/down buttons for encoder slots 1–4.",
+  "version": "1.0.0",
+  "category": "Encoder",
+  "type": "button",
+  "presets": [
+    {
+      "category": "Encoder 1",
+      "label": "Enc 1 Up",
+      "bank": {
+        "style": "text",
+        "text": "Enc 1\nUp",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 1,
+            "delta": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 1",
+      "label": "Enc 1 Down",
+      "bank": {
+        "style": "text",
+        "text": "Enc 1\nDown",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 1,
+            "delta": -1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 2",
+      "label": "Enc 2 Up",
+      "bank": {
+        "style": "text",
+        "text": "Enc 2\nUp",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 2,
+            "delta": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 2",
+      "label": "Enc 2 Down",
+      "bank": {
+        "style": "text",
+        "text": "Enc 2\nDown",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 2,
+            "delta": -1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 3",
+      "label": "Enc 3 Up",
+      "bank": {
+        "style": "text",
+        "text": "Enc 3\nUp",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 3,
+            "delta": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 3",
+      "label": "Enc 3 Down",
+      "bank": {
+        "style": "text",
+        "text": "Enc 3\nDown",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 3,
+            "delta": -1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 4",
+      "label": "Enc 4 Up",
+      "bank": {
+        "style": "text",
+        "text": "Enc 4\nUp",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 4,
+            "delta": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Encoder 4",
+      "label": "Enc 4 Down",
+      "bank": {
+        "style": "text",
+        "text": "Enc 4\nDown",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 5392640
+      },
+      "actions": [
+        {
+          "action": "bridgeTick",
+          "options": {
+            "encoder": 4,
+            "delta": -1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

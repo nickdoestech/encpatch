@@ -1,0 +1,26 @@
+node_modules/
+dist/
+out/
+.DS_Store
+*.log
+.env
+.env.local
+
+# Runtime config (per-machine)
+config.json
+
+# Build artifacts
+*.dmg
+*.zip
+*.tgz
+build/Release/
+companion-module/pkg/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Bridge diagnostics scratch
+probe_*.json
+.harness-replies.jsonl

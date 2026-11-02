@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ENCpatch Bridge — Property Inspector</title>
+  <link rel="stylesheet" href="https://sdpi-components.dev/releases/v3/sdpi.css" />
+  <script src="https://sdpi-components.dev/releases/v3/sdpi-components.js"></script>
+</head>
+<body>
+  <sdpi-item label="ENCpatch host">
+    <sdpi-textfield setting="host" placeholder="127.0.0.1"></sdpi-textfield>
+  </sdpi-item>
+  <sdpi-item label="ENCpatch port">
+    <sdpi-textfield setting="port" placeholder="8733"></sdpi-textfield>
+  </sdpi-item>
+
+  <sdpi-item label="Encoder slot" id="enc-slot-row" hidden>
+    <sdpi-textfield setting="slot" placeholder="1"></sdpi-textfield>
+  </sdpi-item>
+
+  <sdpi-item label="Bank" id="bank-row" hidden>
+    <sdpi-select setting="bank">
+      <option value="Dimmer">Dimmer</option>
+      <option value="Position">Position</option>
+      <option value="Color">Color</option>
+      <option value="Beam">Beam</option>
+      <option value="Gobo">Gobo</option>
+      <option value="Focus">Focus</option>
+      <option value="Shapers">Shapers</option>
+      <option value="Control">Control</option>
+    </sdpi-select>
+  </sdpi-item>
+  <sdpi-item label="Bank index" id="bank-idx-row" hidden>
+    <sdpi-textfield setting="bankIdx" placeholder="1"></sdpi-textfield>
+  </sdpi-item>
+
+  <sdpi-item label="Command" id="cmd-row" hidden>
+    <sdpi-textfield setting="text" placeholder="Group 1 At Full"></sdpi-textfield>
+  </sdpi-item>
+
+  <script>
+    // Show only the fields relevant to the current action UUID.
+    addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('connected', (ev) => {
+        const uuid = ev.detail && ev.detail.actionInfo && ev.detail.actionInfo.action;
+        const show = (id) => document.getElementById(id) && (document.getElementById(id).hidden = false);
+        if (uuid === 'com.encpatch.bridge.encodertick') show('enc-slot-row');
+        if (uuid === 'com.encpatch.bridge.bankselect') { show('bank-row'); show('bank-idx-row'); }
+        if (uuid === 'com.encpatch.bridge.cmd') show('cmd-row');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+{
+  "name": "Console Commands — Examples",
+  "shortname": "Console Commands",
+  "description": "Example console command-line buttons — ready to adapt to your console (Eos, MA3, etc.).",
+  "version": "1.0.0",
+  "category": "Commands",
+  "type": "button",
+  "presets": [
+    {
+      "category": "Examples",
+      "label": "MA3: Select All",
+      "bank": {
+        "style": "text",
+        "text": "MA3\nSelect All",
+        "size": "12px",
+        "color": 16777215,
+        "bgcolor": 3355443
+      },
+      "actions": [
+        {
+          "action": "cmd",
+          "options": {
+            "text": "Select All"
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Examples",
+      "label": "MA3: Thru",
+      "bank": {
+        "style": "text",
+        "text": "MA3\nThru",
+        "size": "12px",
+        "color": 16777215,
+        "bgcolor": 3355443
+      },
+      "actions": [
+        {
+          "action": "cmd",
+          "options": {
+            "text": "Thru"
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Examples",
+      "label": "Eos: Intensity 100",
+      "bank": {
+        "style": "text",
+        "text": "Eos\nIntensity 100",
+        "size": "11px",
+        "color": 16777215,
+        "bgcolor": 4473924
+      },
+      "actions": [
+        {
+          "action": "cmd",
+          "options": {
+            "text": "Intensity 100"
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Examples",
+      "label": "Eos: Intensity 0",
+      "bank": {
+        "style": "text",
+        "text": "Eos\nIntensity 0",
+        "size": "11px",
+        "color": 16777215,
+        "bgcolor": 4473924
+      },
+      "actions": [
+        {
+          "action": "cmd",
+          "options": {
+            "text": "Intensity 0"
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Status",
+      "label": "Status",
+      "bank": {
+        "style": "text",
+        "text": "Console:\n$(encpatch:console_name)\nv$(encpatch:console_version)",
+        "size": "10px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

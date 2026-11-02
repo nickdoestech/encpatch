@@ -1,0 +1,20 @@
+{
+  "name": "Stream Deck + → ETC Eos / Ion",
+  "description": "Stream Deck Plus default mapping for Eos. 4 encoders → /eos/wheel/coarse/<param>, auto-swapping subscriptions based on the current category. Top-row layout (2 rows × 4): Intensity / Color / Image / Sneak, Focus / Shutter / Form / Query. The 6 category buttons (Intensity / Focus / Color / Shutter / Image / Form) swap the SD encoders' subscriptions; Sneak and Query fire the corresponding Eos hardkeys. Edit per-category parameter names in Settings → 'Eos: encoder parameters per category'.",
+  "mappings": [
+    { "name": "Encoder 1 — current category slot 1", "trigger": { "type": "osc", "match": "/sd/enc/1" }, "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.25 }, "action": { "type": "bridgeTick", "encoder": 1 } },
+    { "name": "Encoder 2 — current category slot 2", "trigger": { "type": "osc", "match": "/sd/enc/2" }, "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.25 }, "action": { "type": "bridgeTick", "encoder": 2 } },
+    { "name": "Encoder 3 — current category slot 3", "trigger": { "type": "osc", "match": "/sd/enc/3" }, "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.25 }, "action": { "type": "bridgeTick", "encoder": 3 } },
+    { "name": "Encoder 4 — current category slot 4", "trigger": { "type": "osc", "match": "/sd/enc/4" }, "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.25 }, "action": { "type": "bridgeTick", "encoder": 4 } },
+
+    { "name": "Intensity", "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/1" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Intensity" } },
+    { "name": "Color",     "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/2" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Color"     } },
+    { "name": "Image",     "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/3" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Image"     } },
+    { "name": "Sneak",     "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/4" }, "transform": { "onlyOn": 1 }, "action": { "type": "consoleKey", "name": "sneak" } },
+
+    { "name": "Focus",     "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/5" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Focus"     } },
+    { "name": "Shutter",   "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/6" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Shutter"   } },
+    { "name": "Form",      "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/7" }, "transform": { "onlyOn": 1 }, "action": { "type": "setPage", "page": "Form"      } },
+    { "name": "Query",     "enabled": true, "trigger": { "type": "osc", "match": "/sd/key/8" }, "transform": { "onlyOn": 1 }, "action": { "type": "consoleKey", "name": "query" } }
+  ]
+}

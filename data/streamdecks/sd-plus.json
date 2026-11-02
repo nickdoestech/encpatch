@@ -1,0 +1,23 @@
+{
+  "id": "sd-plus",
+  "name": "Stream Deck + (emulator)",
+  "description": "8 keys (2x4) + 4 rotary encoders + LCD touch strip below the keys.",
+  "viewBox": [0, 0, 540, 360],
+  "controls": [
+    { "id": "k0", "kind": "key", "label": "K1", "addressTemplate": "/sd/key/1", "x": 20,  "y": 20,  "w": 110, "h": 110 },
+    { "id": "k1", "kind": "key", "label": "K2", "addressTemplate": "/sd/key/2", "x": 145, "y": 20,  "w": 110, "h": 110 },
+    { "id": "k2", "kind": "key", "label": "K3", "addressTemplate": "/sd/key/3", "x": 270, "y": 20,  "w": 110, "h": 110 },
+    { "id": "k3", "kind": "key", "label": "K4", "addressTemplate": "/sd/key/4", "x": 395, "y": 20,  "w": 110, "h": 110 },
+    { "id": "k4", "kind": "key", "label": "K5", "addressTemplate": "/sd/key/5", "x": 20,  "y": 145, "w": 110, "h": 110 },
+    { "id": "k5", "kind": "key", "label": "K6", "addressTemplate": "/sd/key/6", "x": 145, "y": 145, "w": 110, "h": 110 },
+    { "id": "k6", "kind": "key", "label": "K7", "addressTemplate": "/sd/key/7", "x": 270, "y": 145, "w": 110, "h": 110 },
+    { "id": "k7", "kind": "key", "label": "K8", "addressTemplate": "/sd/key/8", "x": 395, "y": 145, "w": 110, "h": 110 },
+
+    { "id": "lcd",  "kind": "lcd",     "label": "LCD",  "addressTemplate": "/sd/lcd",      "x": 20,  "y": 270, "w": 485, "h": 30 },
+
+    { "id": "enc1", "kind": "encoder", "label": "Enc 1","addressTemplate": "/sd/enc/1",    "x": 40,  "y": 305, "w": 70,  "h": 50 },
+    { "id": "enc2", "kind": "encoder", "label": "Enc 2","addressTemplate": "/sd/enc/2",    "x": 165, "y": 305, "w": 70,  "h": 50 },
+    { "id": "enc3", "kind": "encoder", "label": "Enc 3","addressTemplate": "/sd/enc/3",    "x": 290, "y": 305, "w": 70,  "h": 50 },
+    { "id": "enc4", "kind": "encoder", "label": "Enc 4","addressTemplate": "/sd/enc/4",    "x": 415, "y": 305, "w": 70,  "h": 50 }
+  ]
+}

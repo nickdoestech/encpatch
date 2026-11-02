@@ -1,0 +1,59 @@
+{
+  "Name": "ENCpatch Bridge",
+  "Description": "Drive any console (grandMA3, ETC Eos, Onyx, Titan, Hog, MagicQ, Vista) through ENCpatch from a Stream Deck.",
+  "Author": "ENCpatch",
+  "Version": "0.13.41",
+  "Icon": "icons/plugin",
+  "URL": "https://github.com/<your-fork>/encpatch",
+  "PropertyInspectorPath": "code/pi.html",
+  "Software": { "MinimumVersion": "6.4" },
+  "OS": [
+    { "Platform": "mac",     "MinimumVersion": "12.0" },
+    { "Platform": "windows", "MinimumVersion": "10"   }
+  ],
+  "SDKVersion": 2,
+  "Category": "Lighting",
+  "CategoryIcon": "icons/category",
+  "CodePath": "code/plugin.js",
+  "Nodejs": { "Version": "20", "Debug": "enabled" },
+  "Actions": [
+    {
+      "Name": "Encoder Tick",
+      "UUID": "com.encpatch.bridge.encodertick",
+      "Tooltip": "Send an encoder tick to the active console driver.",
+      "Icon": "icons/action-encoder",
+      "PropertyInspectorPath": "code/pi.html",
+      "Controllers": ["Encoder"],
+      "States": [{ "Image": "icons/state-encoder", "TitleAlignment": "middle" }],
+      "Encoder": {
+        "Icon": "icons/state-encoder",
+        "background": "icons/state-encoder",
+        "Layout": "$B1",
+        "TriggerDescription": {
+          "Rotate":     "Tick encoder",
+          "Push":       "Toggle fine/coarse",
+          "Touch":      "Cycle stacked attribute",
+          "LongTouch":  "Reset slot"
+        }
+      }
+    },
+    {
+      "Name": "Select Bank",
+      "UUID": "com.encpatch.bridge.bankselect",
+      "Tooltip": "Switch to a feature bank (Dimmer / Position / Color / etc).",
+      "Icon": "icons/action-bank",
+      "PropertyInspectorPath": "code/pi.html",
+      "Controllers": ["Keypad"],
+      "States": [{ "Image": "icons/state-bank", "TitleAlignment": "middle" }]
+    },
+    {
+      "Name": "Console Command",
+      "UUID": "com.encpatch.bridge.cmd",
+      "Tooltip": "Send a raw command-line string to the active console.",
+      "Icon": "icons/action-cmd",
+      "PropertyInspectorPath": "code/pi.html",
+      "Controllers": ["Keypad"],
+      "States": [{ "Image": "icons/state-cmd", "TitleAlignment": "middle" }]
+    }
+  ]
+}

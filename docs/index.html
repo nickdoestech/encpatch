@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENCpatch</title>
+<meta name="description" content="Real encoders for grandMA3 onPC. Plug in a Stream Deck Plus and its four wheels become your console's encoder bar — live labels, any fixture, zero configuration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* ENCpatch — committed dark theme (control-room aesthetic).
+     Single visual world by design: lighting programmers work in the dark. */
+  :root {
+    --ground: #0e1013;
+    --panel: #161a20;
+    --panel-2: #1c212a;
+    --line: #262c36;
+    --text: #e8eaee;
+    --dim: #9aa2ae;
+    --faint: #6b7482;
+    --amber: #ffb627;       /* tungsten — the accent */
+    --amber-deep: #cc8a0e;
+    --lcd: #7fd4ff;         /* LCD strip glow */
+    --ok: #5dd28a;          /* status: production */
+    --beta: #ffb627;        /* status: beta (shares tungsten) */
+    --exp: #6b7482;         /* status: experimental */
+    --display: "Big Shoulders", "Arial Narrow", "Helvetica Neue", sans-serif;
+    --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--amber); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- header ---------- */
+  header.site {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+  }
+  .brand {
+    font-family: var(--display); font-weight: 800; font-size: 26px;
+    letter-spacing: .04em; color: var(--text);
+  }
+  .brand em { font-style: normal; color: var(--amber); }
+  nav.top { display: flex; gap: 26px; }
+  nav.top a {
+    color: var(--dim); font-size: 14px; font-weight: 500;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  nav.top a:hover { color: var(--text); text-decoration: none; }
+  @media (max-width: 640px) { nav.top { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 64px 0 30px; }
+  .hero-grid {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .eyebrow {
+    font-family: var(--mono); font-size: 13px; color: var(--lcd);
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(52px, 7.5vw, 84px); line-height: .95;
+    letter-spacing: .01em; text-wrap: balance; text-transform: uppercase;
+  }
+  h1 .amber { color: var(--amber); }
+  .hero p.lede {
+    margin-top: 22px; font-size: 19px; color: var(--dim); max-width: 42ch;
+  }
+  .cta-row { display: flex; align-items: center; gap: 18px; margin-top: 34px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; font-family: var(--body); font-weight: 600; font-size: 16px;
+    background: var(--amber); color: #14100a; padding: 14px 26px; border-radius: 6px;
+    border: 1px solid var(--amber);
+  }
+  .btn:hover { background: #ffc650; text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn.ghost:hover { border-color: var(--dim); background: var(--panel); }
+  .cta-meta { font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+
+  /* ---------- deck illustration ---------- */
+  .deck-fig { margin: 0; }
+  .deck-fig svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 24px 48px rgba(0,0,0,.55)); }
+  .deck-fig figcaption {
+    margin-top: 14px; font-family: var(--mono); font-size: 12px;
+    color: var(--faint); text-align: center;
+  }
+  .lcd-label { font-family: var(--mono); font-weight: 600; font-size: 13px; fill: var(--lcd); }
+  .lcd-value { font-family: var(--mono); font-weight: 400; font-size: 11px; fill: #d9f2ff; opacity: .85; }
+
+  /* ---------- sections ---------- */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4vw, 42px);
+    text-transform: uppercase; letter-spacing: .02em; margin-bottom: 8px; text-wrap: balance;
+  }
+  .kicker {
+    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .section-intro { color: var(--dim); max-width: 62ch; margin-bottom: 36px; }
+
+  /* pitch */
+  .pitch p { font-size: 19px; max-width: 66ch; color: var(--text); }
+  .pitch p + p { margin-top: 18px; }
+  .pitch strong { color: var(--amber); font-weight: 600; }
+
+  /* how it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 26px 24px;
+  }
+  .step .num {
+    font-family: var(--display); font-weight: 800; font-size: 40px; color: var(--amber);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .step h3 { font-family: var(--body); font-weight: 600; font-size: 17px; margin-bottom: 8px; }
+  .step p { font-size: 15px; color: var(--dim); }
+
+  /* features */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 780px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    border: 1px solid var(--line); border-radius: 10px; padding: 24px;
+    background: linear-gradient(180deg, var(--panel) 0%, var(--ground) 100%);
+  }
+  .feature h3 { font-family: var(--body); font-weight: 600; font-size: 17px; margin-bottom: 8px; }
+  .feature p { font-size: 15px; color: var(--dim); }
+  .feature .tag {
+    display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--beta); border: 1px solid var(--amber-deep);
+    border-radius: 4px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px;
+  }
+
+  /* console table */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--panel); }
+  th, td { text-align: left; padding: 15px 20px; font-size: 15px; }
+  th {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint); border-bottom: 1px solid var(--line); font-weight: 500;
+  }
+  td { border-bottom: 1px solid var(--line); color: var(--dim); }
+  tr:last-child td { border-bottom: none; }
+  td.console { color: var(--text); font-weight: 500; }
+  .status { font-family: var(--mono); font-size: 13px; white-space: nowrap; }
+  .status::before {
+    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    margin-right: 9px; vertical-align: 1px;
+  }
+  .status.ok { color: var(--ok); } .status.ok::before { background: var(--ok); }
+  .status.beta { color: var(--beta); } .status.beta::before { background: var(--beta); }
+  .status.exp { color: var(--exp); } .status.exp::before { background: var(--exp); }
+
+  /* requirements */
+  .req-list { list-style: none; display: grid; gap: 14px; max-width: 68ch; }
+  .req-list li {
+    padding-left: 26px; position: relative; color: var(--dim); font-size: 15.5px;
+  }
+  .req-list li::before {
+    content: "▸"; position: absolute; left: 0; color: var(--amber);
+  }
+  .req-list strong { color: var(--text); font-weight: 600; }
+
+  /* install */
+  .warn {
+    border: 1px solid var(--amber-deep); border-left: 4px solid var(--amber);
+    background: rgba(255, 182, 39, .06); border-radius: 8px; padding: 20px 22px;
+    max-width: 72ch; margin-bottom: 28px;
+  }
+  .warn h3 { font-family: var(--body); font-weight: 600; font-size: 16px; margin-bottom: 8px; color: var(--amber); }
+  .warn p { font-size: 15px; color: var(--dim); }
+  pre.term {
+    background: #0a0c0f; border: 1px solid var(--line); border-radius: 8px;
+    padding: 16px 20px; overflow-x: auto; max-width: 72ch; margin: 14px 0;
+  }
+  pre.term code { font-family: var(--mono); font-size: 14.5px; color: var(--lcd); }
+  pre.term code .prompt { color: var(--faint); user-select: none; }
+  ol.install-steps { max-width: 68ch; padding-left: 22px; display: grid; gap: 12px; }
+  ol.install-steps li { color: var(--dim); font-size: 15.5px; }
+  ol.install-steps strong { color: var(--text); font-weight: 600; }
+
+  /* faq */
+  .faq { max-width: 72ch; display: grid; gap: 10px; }
+  details {
+    border: 1px solid var(--line); border-radius: 8px; background: var(--panel);
+  }
+  summary {
+    cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 15.5px;
+    list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--mono); color: var(--amber); font-size: 18px; flex-shrink: 0; }
+  details[open] summary::after { content: "–"; }
+  details .a { padding: 0 20px 18px; font-size: 15px; color: var(--dim); }
+  details .a code { font-family: var(--mono); font-size: 13.5px; color: var(--lcd); }
+
+  /* footer cta */
+  .footer-cta { text-align: center; padding: 80px 0; }
+  .footer-cta h2 { margin-bottom: 14px; }
+  .footer-cta p { color: var(--dim); margin-bottom: 30px; }
+  footer.site {
+    border-top: 1px solid var(--line); padding: 28px 0 40px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--faint);
+  }
+  footer.site a { color: var(--dim); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="site">
+    <div class="brand"><em>ENC</em>PATCH</div>
+    <nav class="top">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#consoles">Consoles</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Stream Deck Plus × grandMA3 onPC</div>
+        <h1>Real encoders<br>for <span class="amber">grandMA3</span> onPC.</h1>
+        <p class="lede">Plug in a Stream Deck&nbsp;Plus and its four wheels become your console's
+        encoder bar — live labels on the LCD strip, any fixture, any page, zero configuration.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://github.com/nickdoestech/encpatch/releases/latest/download/ENCpatch-macOS.zip">Download for Mac</a>
+          <a class="btn ghost" href="#install">Install guide</a>
+        </div>
+        <p class="cta-meta" style="margin-top:14px;">v0.13.43 · Apple Silicon · free · MIT-licensed · via GitHub Releases</p>
+      </div>
+
+      <figure class="deck-fig" aria-label="Illustration of a Stream Deck Plus mirroring grandMA3's encoder bar">
+        <!-- Stylized illustration (not a product photo). LCD values animate via JS below. -->
+        <svg viewBox="0 0 520 400" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#23272e"/>
+              <stop offset="1" stop-color="#101317"/>
+            </linearGradient>
+            <linearGradient id="keyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0c0e11"/>
+              <stop offset="1" stop-color="#05070a"/>
+            </linearGradient>
+            <radialGradient id="knobGrad" cx="0.35" cy="0.3" r="1">
+              <stop offset="0" stop-color="#3a4048"/>
+              <stop offset="1" stop-color="#14171b"/>
+            </radialGradient>
+            <linearGradient id="lcdGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#06141d"/>
+              <stop offset="1" stop-color="#041017"/>
+            </linearGradient>
+          </defs>
+
+          <!-- deck body -->
+          <rect x="20" y="16" width="480" height="368" rx="26" fill="url(#bodyGrad)" stroke="#31363e" stroke-width="1.5"/>
+
+          <!-- 8 keys, 2 rows of 4 -->
+          <g>
+            <rect x="56" y="52" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="164" y="52" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="272" y="52" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="380" y="52" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="56" y="138" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="164" y="138" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="272" y="138" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <rect x="380" y="138" width="92" height="70" rx="10" fill="url(#keyGrad)" stroke="#2a2f37"/>
+            <!-- feature-group key labels -->
+            <text x="102" y="93" text-anchor="middle" class="lcd-label" fill="#ffb627" style="fill:#ffb627">DIM</text>
+            <text x="210" y="93" text-anchor="middle" class="lcd-label" fill="#ffb627" style="fill:#ffb627">POS</text>
+            <text x="318" y="93" text-anchor="middle" class="lcd-label" fill="#ffb627" style="fill:#ffb627">COLOR</text>
+            <text x="426" y="93" text-anchor="middle" class="lcd-label" fill="#ffb627" style="fill:#ffb627">GOBO</text>
+            <text x="102" y="179" text-anchor="middle" class="lcd-label" style="fill:#9aa2ae">BEAM</text>
+            <text x="210" y="179" text-anchor="middle" class="lcd-label" style="fill:#9aa2ae">FOCUS</text>
+            <text x="318" y="179" text-anchor="middle" class="lcd-label" style="fill:#9aa2ae">CTRL</text>
+            <text x="426" y="179" text-anchor="middle" class="lcd-label" style="fill:#9aa2ae">SHAPE</text>
+          </g>
+
+          <!-- LCD strip: 4 cells -->
+          <g>
+            <rect x="48" y="228" width="424" height="62" rx="8" fill="url(#lcdGrad)" stroke="#123243"/>
+            <line x1="154" y1="232" x2="154" y2="286" stroke="#0d2634" stroke-width="2"/>
+            <line x1="260" y1="232" x2="260" y2="286" stroke="#0d2634" stroke-width="2"/>
+            <line x1="366" y1="232" x2="366" y2="286" stroke="#0d2634" stroke-width="2"/>
+            <text x="101" y="254" text-anchor="middle" class="lcd-label">Pan</text>
+            <text x="207" y="254" text-anchor="middle" class="lcd-label">Tilt</text>
+            <text x="313" y="254" text-anchor="middle" class="lcd-label">Zoom</text>
+            <text x="419" y="254" text-anchor="middle" class="lcd-label">Focus</text>
+            <text x="101" y="276" text-anchor="middle" class="lcd-value" id="lcd-v1">12.4</text>
+            <text x="207" y="276" text-anchor="middle" class="lcd-value" id="lcd-v2">-38.0</text>
+            <text x="313" y="276" text-anchor="middle" class="lcd-value" id="lcd-v3">54 %</text>
+            <text x="419" y="276" text-anchor="middle" class="lcd-value" id="lcd-v4">71 %</text>
+          </g>
+
+          <!-- 4 encoder knobs -->
+          <g>
+            <circle cx="101" cy="336" r="27" fill="url(#knobGrad)" stroke="#3a4048" stroke-width="1.5"/>
+            <circle cx="207" cy="336" r="27" fill="url(#knobGrad)" stroke="#3a4048" stroke-width="1.5"/>
+            <circle cx="313" cy="336" r="27" fill="url(#knobGrad)" stroke="#3a4048" stroke-width="1.5"/>
+            <circle cx="419" cy="336" r="27" fill="url(#knobGrad)" stroke="#3a4048" stroke-width="1.5"/>
+            <!-- indicator ticks -->
+            <line x1="101" y1="315" x2="101" y2="323" stroke="#ffb627" stroke-width="3" stroke-linecap="round" id="tick1"/>
+            <line x1="207" y1="315" x2="207" y2="323" stroke="#ffb627" stroke-width="3" stroke-linecap="round"/>
+            <line x1="313" y1="315" x2="313" y2="323" stroke="#ffb627" stroke-width="3" stroke-linecap="round"/>
+            <line x1="419" y1="315" x2="419" y2="323" stroke="#ffb627" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <figcaption>The deck's LCD strip mirrors MA3's encoder bar, live. (Illustration.)</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ================= PITCH ================= -->
+  <section class="pitch">
+    <div class="kicker">Why</div>
+    <h2>Stop programming movers with a mouse</h2>
+    <div style="height:18px"></div>
+    <p>Running grandMA3 onPC without a wing means clicking through encoder bars with a cursor.
+    ENCpatch gives you back physical wheels: a Stream Deck&nbsp;Plus on your desk mirrors MA3's
+    encoder bar in real time. Select a fixture and the deck's LCD strip shows exactly what MA3
+    shows — Pan and Tilt, Color mixing, Gobo wheels — and turning a knob drives that attribute
+    on the console.</p>
+    <p>Change feature groups, flip sub-pages, swap fixture types: <strong>the wheels follow.</strong>
+    No per-fixture setup, no mapping files.</p>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="how">
+    <div class="kicker">Setup</div>
+    <h2>Three steps to wheels</h2>
+    <p class="section-intro">One paste into MA3, and you're turning encoders.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Plug in the deck</h3>
+        <p>Connect a Stream Deck Plus. Quit Elgato's own Stream Deck app first — ENCpatch drives
+        the hardware directly over USB.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Import the bridge plugin</h3>
+        <p>Paste ENCpatch's bridge URL into grandMA3 onPC's plugin import dialog — one paste, one
+        double-click. The status dot goes green when MA3 answers.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Grab a fixture, turn a wheel</h3>
+        <p>The LCD strip is already showing MA3's encoder bar. Whatever the label says is what
+        the wheel drives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
+  <section id="features">
+    <div class="kicker">Features</div>
+    <h2>What it does</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Live encoder bar mirroring</h3>
+        <p>The deck's 4 wheels and LCD labels track grandMA3's encoder bar automatically —
+        feature-group changes and sub-pages included. Any fixture type, any page.</p>
+      </div>
+      <div class="feature">
+        <h3>Stacked attribute cycling</h3>
+        <p>Tap an encoder's LCD cell to cycle stacked attributes (Color wheel → wheel spin →
+        shake…), with an auto-discover that reads your actual patched fixtures.</p>
+      </div>
+      <div class="feature">
+        <h3>Feature-group keys</h3>
+        <p>The deck's 8 buttons page between Dimmer / Position / Color / Gobo / Beam and friends,
+        in step with the console.</p>
+      </div>
+      <div class="feature">
+        <h3>ETC Eos support<span class="tag">Beta</span></h3>
+        <p>Pure OSC over the network. Mirror a Custom Encoder Map (Tab&nbsp;40) or pin four
+        parameters to the wheels; Ion and Nomad key layouts included.</p>
+      </div>
+      <div class="feature">
+        <h3>Open OSC, in and out</h3>
+        <p>TouchOSC, fader wings, and Bitfocus Companion can drive ENCpatch's mappings too.</p>
+      </div>
+      <div class="feature">
+        <h3>Local web UI, no cloud</h3>
+        <p>Mappings, encoder stacks, console choice, and live diagnostics at
+        <code style="font-family:var(--mono);font-size:14px;color:var(--lcd)">127.0.0.1:8733</code>.
+        Nothing leaves your machine. Free and open source, MIT-licensed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONSOLES ================= -->
+  <section id="consoles">
+    <div class="kicker">Compatibility</div>
+    <h2>Console support</h2>
+    <p class="section-intro">Honest status, no asterisks.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Console</th><th>Status</th><th>Transport</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="console">grandMA3 onPC</td>
+            <td><span class="status ok">Supported — flagship</span></td>
+            <td>Bridge plugin (localhost TCP)</td>
+          </tr>
+          <tr>
+            <td class="console">ETC Eos / Ion / Nomad</td>
+            <td><span class="status beta">Beta</span></td>
+            <td>OSC over UDP</td>
+          </tr>
+          <tr>
+            <td class="console">Onyx · Titan · Hog&nbsp;5 · MagicQ · Vista&nbsp;3</td>
+            <td><span class="status exp">Experimental scaffolds — not validated</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= REQUIREMENTS ================= -->
+  <section id="requirements">
+    <div class="kicker">Requirements</div>
+    <h2>What you need</h2>
+    <div style="height:16px"></div>
+    <ul class="req-list">
+      <li><strong>Apple Silicon Mac</strong> (M1 or newer). Intel Macs and Windows are not supported.</li>
+      <li><strong>grandMA3 onPC 2.0 or newer</strong> on the same Mac — or an Eos-family console /
+      Nomad on the network with OSC enabled (TX port 8002).</li>
+      <li><strong>Elgato Stream Deck Plus</strong> recommended. Other Stream Decks work for
+      buttons only — the encoders are the point.</li>
+      <li><strong>Elgato's Stream Deck app must be quit</strong> while ENCpatch runs — the deck
+      is driven directly over USB.</li>
+    </ul>
+  </section>
+
+  <!-- ================= INSTALL ================= -->
+  <section id="install">
+    <div class="kicker">Install</div>
+    <h2>Two minutes, one Terminal line</h2>
+    <div style="height:16px"></div>
+
+    <div class="warn">
+      <h3>Read this first — the "damaged" warning</h3>
+      <p>ENCpatch is independently developed and not App Store-signed, so macOS shows a false
+      <em>"ENCpatch is damaged and can't be opened"</em> warning on first launch. The app is fine —
+      that's Gatekeeper reacting to an unsigned indie app. After copying it to Applications, run
+      this once in Terminal, then open it normally:</p>
+      <pre class="term"><code><span class="prompt">$ </span>xattr -cr /Applications/ENCpatch.app</code></pre>
+      <p>You only do this once per install.</p>
+    </div>
+
+    <ol class="install-steps">
+      <li>Open the <strong>.dmg</strong> and drag the ENCpatch icon onto the Applications shortcut.</li>
+      <li>Eject the .dmg and run the <strong>xattr command</strong> above.</li>
+      <li>Open ENCpatch. Grant the <strong>Input Monitoring</strong> permission macOS asks for
+      (that's how it talks to the Stream Deck), then re-open the app.</li>
+      <li>Follow the 3-step welcome screen: deck → bridge plugin → preset. Done.</li>
+    </ol>
+    <p style="margin-top:22px;color:var(--dim);font-size:15px;">
+      Full walkthrough, Eos setup, and troubleshooting: see the
+      <a href="https://github.com/nickdoestech/encpatch/blob/main/INSTALL.md">install guide</a>.
+    </p>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq">
+    <div class="kicker">FAQ</div>
+    <h2>Questions</h2>
+    <div style="height:16px"></div>
+    <div class="faq">
+      <details>
+        <summary>What does it cost?</summary>
+        <div class="a">Nothing. ENCpatch is free and open source, MIT-licensed.</div>
+      </details>
+      <details>
+        <summary>Does it work on Windows?</summary>
+        <div class="a">No — macOS on Apple Silicon only, for now.</div>
+      </details>
+      <details>
+        <summary>Do I need a Stream Deck Plus specifically?</summary>
+        <div class="a">For the encoders, yes — that's the whole point. Regular Stream Decks can
+        still run the button/key layouts.</div>
+      </details>
+      <details>
+        <summary>Does it work with a real grandMA3 console?</summary>
+        <div class="a">It's built and tested against grandMA3 onPC on the same Mac. The bridge
+        plugin can bind to a LAN address with a token for remote setups, but console-hardware
+        workflows aren't the target.</div>
+      </details>
+      <details>
+        <summary>Why does macOS say the app is damaged?</summary>
+        <div class="a">It isn't — that's Gatekeeper reacting to an unsigned indie app. The
+        one-line <code>xattr -cr /Applications/ENCpatch.app</code> command fixes it permanently.</div>
+      </details>
+      <details>
+        <summary>Is my show data sent anywhere?</summary>
+        <div class="a">No. Everything runs locally: USB to the deck, localhost TCP to MA3, LAN
+        OSC to Eos. No accounts, no telemetry.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER CTA ================= -->
+  <div class="footer-cta">
+    <h2>Put your hands back on wheels</h2>
+    <p>Free · open source · Apple Silicon · v0.13.43</p>
+    <a class="btn" href="https://github.com/nickdoestech/encpatch/releases/latest/download/ENCpatch-macOS.zip">Download for Mac</a>
+  </div>
+
+  <footer class="site">
+    <div><span style="color:var(--amber)">ENC</span>PATCH — encoder-driven control patching</div>
+    <div>MIT license · runs 100% locally · <a href="https://github.com/nickdoestech/encpatch">source on GitHub</a></div>
+  </footer>
+</div>
+
+<script>
+  // Gentle "live mirror" effect on the illustration's LCD values.
+  (function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var v = [12.4, -38.0, 54, 71];
+    var els = [1, 2, 3, 4].map(function (i) { return document.getElementById("lcd-v" + i); });
+    if (els.some(function (e) { return !e; })) return;
+    setInterval(function () {
+      v[0] += (Math.random() - 0.5) * 1.6;
+      v[1] += (Math.random() - 0.5) * 1.2;
+      v[2] = Math.min(100, Math.max(0, v[2] + (Math.random() - 0.5) * 2));
+      v[3] = Math.min(100, Math.max(0, v[3] + (Math.random() - 0.5) * 2));
+      els[0].textContent = v[0].toFixed(1);
+      els[1].textContent = v[1].toFixed(1);
+      els[2].textContent = Math.round(v[2]) + " %";
+      els[3].textContent = Math.round(v[3]) + " %";
+    }, 900);
+  })();
+</script>
+
+</body>
+</html>

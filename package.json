@@ -1,0 +1,107 @@
+{
+  "name": "encpatch",
+  "version": "0.13.43",
+  "description": "ENCpatch — encoder-driven control patching for grandMA3 (more consoles coming).",
+  "main": "electron/main.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "dev:electron": "electron .",
+    "test": "node --test server/core/*.test.mjs",
+    "lint": "node -e \"require('./server/server.js'); console.log('require ok')\"",
+    "dist:mac": "electron-builder --mac --arm64",
+    "dist:mac:both": "electron-builder --mac",
+    "share": "node scripts/package-share.js",
+    "pack:streamdeck": "node scripts/pack-streamdeck.js"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9",
+    "express": "^4.19.2",
+    "osc": "^2.4.4",
+    "ws": "^8.18.0"
+  },
+  "optionalDependencies": {
+    "@elgato-stream-deck/node": "^7.6.2",
+    "@napi-rs/canvas": "^0.1.100"
+  },
+  "devDependencies": {
+    "@electron/asar": "^3.2.18",
+    "electron": "^32.2.5",
+    "electron-builder": "^25.1.8"
+  },
+  "license": "MIT",
+  "build": {
+    "appId": "com.encpatch.app",
+    "productName": "ENCpatch",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "nickdoestech",
+        "repo": "encpatch"
+      }
+    ],
+    "afterPack": "./build/afterPack.js",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/@elgato-stream-deck/**/*",
+      "node_modules/node-hid/**/*",
+      "node_modules/@napi-rs/canvas/**/*",
+      "node_modules/@napi-rs/canvas-darwin-arm64/**/*"
+    ],
+    "files": [
+      "electron/**/*",
+      "server/**/*",
+      "ui/**/*",
+      "data/**/*",
+      "docs/ma3-plugin/**/*",
+      "package.json",
+      "!**/*.test.mjs",
+      "!**/*.test.js"
+    ],
+    "extraResources": [
+      {
+        "from": "docs/ma3-plugin",
+        "to": "ma3-plugin",
+        "filter": ["**/*.lua"]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.music",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["arm64"]
+        }
+      ],
+      "icon": "electron/icon-512.png",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null,
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "ENCpatch does not use the microphone.",
+        "NSCameraUsageDescription": "ENCpatch does not use the camera.",
+        "LSUIElement": false
+      }
+    },
+    "dmg": {
+      "title": "ENCpatch ${version}",
+      "icon": "electron/icon-512.png",
+      "contents": [
+        { "x": 130, "y": 220, "type": "file" },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ],
+      "window": { "width": 540, "height": 380 }
+    },
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    }
+  }
+}

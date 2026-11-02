@@ -1,0 +1,25 @@
+{
+  "id": "sd-mk2",
+  "name": "Stream Deck MK.2 (emulator)",
+  "description": "15 keys (3 rows x 5 columns).",
+  "viewBox": [0, 0, 660, 410],
+  "controls": [
+    { "id": "k0",  "kind": "key", "label": "1",  "addressTemplate": "/sd/key/1",  "x": 20,  "y": 20,  "w": 120, "h": 120 },
+    { "id": "k1",  "kind": "key", "label": "2",  "addressTemplate": "/sd/key/2",  "x": 150, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k2",  "kind": "key", "label": "3",  "addressTemplate": "/sd/key/3",  "x": 280, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k3",  "kind": "key", "label": "4",  "addressTemplate": "/sd/key/4",  "x": 410, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k4",  "kind": "key", "label": "5",  "addressTemplate": "/sd/key/5",  "x": 540, "y": 20,  "w": 120, "h": 120 },
+
+    { "id": "k5",  "kind": "key", "label": "6",  "addressTemplate": "/sd/key/6",  "x": 20,  "y": 150, "w": 120, "h": 120 },
+    { "id": "k6",  "kind": "key", "label": "7",  "addressTemplate": "/sd/key/7",  "x": 150, "y": 150, "w": 120, "h": 120 },
+    { "id": "k7",  "kind": "key", "label": "8",  "addressTemplate": "/sd/key/8",  "x": 280, "y": 150, "w": 120, "h": 120 },
+    { "id": "k8",  "kind": "key", "label": "9",  "addressTemplate": "/sd/key/9",  "x": 410, "y": 150, "w": 120, "h": 120 },
+    { "id": "k9",  "kind": "key", "label": "10", "addressTemplate": "/sd/key/10", "x": 540, "y": 150, "w": 120, "h": 120 },
+
+    { "id": "k10", "kind": "key", "label": "11", "addressTemplate": "/sd/key/11", "x": 20,  "y": 280, "w": 120, "h": 120 },
+    { "id": "k11", "kind": "key", "label": "12", "addressTemplate": "/sd/key/12", "x": 150, "y": 280, "w": 120, "h": 120 },
+    { "id": "k12", "kind": "key", "label": "13", "addressTemplate": "/sd/key/13", "x": 280, "y": 280, "w": 120, "h": 120 },
+    { "id": "k13", "kind": "key", "label": "14", "addressTemplate": "/sd/key/14", "x": 410, "y": 280, "w": 120, "h": 120 },
+    { "id": "k14", "kind": "key", "label": "15", "addressTemplate": "/sd/key/15", "x": 540, "y": 280, "w": 120, "h": 120 }
+  ]
+}

@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ENCpatch</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- First-run welcome / setup. Hidden by default; app.js shows it when
+       there's no encpatch.welcomed flag in localStorage.
+       Steps + status dots are rendered by welcomeRender() in app.js based on
+       the chosen console. MA3 sees the bridge-plugin step; Eos and other OSC
+       consoles see a host/port form instead. -->
+  <div id="welcome-overlay" class="welcome-overlay" hidden>
+    <div class="welcome-card">
+      <div class="welcome-header">
+        <span class="ma-badge enc-badge"><span>E</span><span>N</span><span>C</span></span>
+        <h1>Welcome to ENCpatch</h1>
+        <p class="welcome-sub">Let's get you connected. This takes about 2 minutes.</p>
+      </div>
+
+      <div class="welcome-console-pick">
+        <label for="welcome-console-select"><strong>Which console will you use?</strong></label>
+        <select id="welcome-console-select" class="welcome-console-select"></select>
+        <span class="welcome-hint" id="welcome-console-hint"></span>
+      </div>
+
+      <ol class="welcome-steps" id="welcome-steps"></ol>
+
+      <div class="welcome-status" id="welcome-status"></div>
+
+      <div class="welcome-footer">
+        <button class="btn" id="welcome-skip">Skip for now</button>
+        <button class="btn btn-primary" id="welcome-done">I'm set — open ENCpatch</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" id="conn-dot"></span>
+      <span class="ma-badge enc-badge"><span>E</span><span>N</span><span>C</span></span>
+      <strong>ENCpatch</strong>
+      <span class="version" id="version-tag">v0.1</span>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="visual">Visual builder</button>
+      <button class="tab" data-tab="mappings">Mappings</button>
+      <button class="tab" data-tab="settings">Settings</button>
+      <button class="tab" data-tab="monitor">Monitor</button>
+      <button class="tab" data-tab="help">Help</button>
+    </nav>
+    <div class="status" id="status-line">Connecting…</div>
+    <div class="status" id="page-line" title="MA3 encoder page"></div>
+    <div class="status" id="health-pill" title="MA3 traffic / bridge health">—</div>
+    <button class="btn" id="panic-btn" title="Suppress all sends to MA3 for 5 seconds" style="margin: 0 8px; background: #4a1a1a; border-color: #ff5252; color: #ff5252;">PANIC</button>
+    <div class="updater-notification" id="updater-notif" hidden>
+      <span id="updater-status"></span>
+      <button class="btn btn-small" id="updater-dismiss" hidden>Dismiss</button>
+      <button class="btn btn-small btn-accent" id="updater-install" hidden>Install now</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Visual builder -->
+    <section class="panel active" id="tab-visual">
+      <div class="vb-toolbar">
+        <label>Console
+          <select id="vb-console"></select>
+        </label>
+        <label>Page
+          <select id="vb-page"></select>
+        </label>
+        <label>Stream Deck
+          <select id="vb-streamdeck"></select>
+        </label>
+        <button class="btn" id="vb-add-device" title="Add another mappable device (max 3)">+ Add device</button>
+        <label class="inline"><input type="checkbox" id="vb-test-mode" /> Test mode (clicks fire mappings)</label>
+        <div class="vb-status" id="vb-hint">Click a control on either side to start a binding.</div>
+        <button class="btn" id="vb-clear">Clear selection</button>
+      </div>
+
+      <div class="vb-pages" id="vb-pages-row" hidden></div>
+      <div class="vb-encoder-bar" id="vb-encoder-bar"></div>
+      <div class="vb-page-editor" id="vb-page-editor" hidden></div>
+
+      <div class="vb-canvas">
+        <div class="vb-pane">
+          <div class="vb-pane-title" id="vb-console-title">Console</div>
+          <div class="vb-svg-wrap"><svg id="vb-console-svg" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+        <div class="vb-devices-col" id="vb-devices-col">
+          <!-- One vb-pane per configured device, rendered by JS -->
+          <div class="vb-pane">
+            <div class="vb-pane-title" id="vb-sd-title">Stream Deck</div>
+            <div class="vb-svg-wrap"><svg id="vb-sd-svg" preserveAspectRatio="xMidYMid meet"></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vb-binding" id="vb-binding-card" hidden>
+        <h3>Bind <span id="vb-bind-label"></span></h3>
+        <div class="row">
+          <label>Behavior
+            <select id="vb-mode">
+              <option value="auto">Auto (Recommended)</option>
+              <option value="button">Button (press → fire)</option>
+              <option value="fader">Fader (analog 0..1)</option>
+              <option value="accumulate">Encoder ticks → fader (OSC, absolute)</option>
+              <option value="relay">Encoder ticks → encoder (OSC, relative)</option>
+              <option value="cmd-tick">Encoder ticks → MA3 /cmd Attribute (Recommended for SD+)</option>
+            </select>
+          </label>
+          <label>Attribute (cmd-tick only)
+            <select id="vb-attr">
+              <option value="">— pick an attribute —</option>
+            </select>
+          </label>
+          <label>Step (encoder)
+            <input id="vb-step" type="number" step="0.005" value="0.01" />
+          </label>
+          <label>Curve
+            <select id="vb-curve">
+              <option value="linear">linear</option>
+              <option value="invert">invert</option>
+              <option value="log">log</option>
+              <option value="exp">exp</option>
+            </select>
+          </label>
+          <label>Arg type
+            <select id="vb-argtype">
+              <option value="f">f (float)</option>
+              <option value="i">i (int)</option>
+              <option value="T">T (true)</option>
+              <option value="F">F (false)</option>
+              <option value="s">s (string)</option>
+            </select>
+          </label>
+          <label class="inline"><input type="checkbox" id="vb-feedback" checked /> Bidirectional feedback (MA3 → Stream Deck)</label>
+        </div>
+        <div class="actions">
+          <button class="btn" id="vb-bind-cancel">Cancel</button>
+          <button class="btn primary" id="vb-bind-save">Create mapping</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mappings -->
+    <section class="panel" id="tab-mappings">
+      <div class="panel-head">
+        <h2>Mappings</h2>
+        <div class="head-actions">
+          <button class="btn primary" id="btn-new-mapping">+ New mapping</button>
+          <button class="btn" id="btn-save-preset">Save as preset…</button>
+          <button class="btn" id="btn-load-presets">Load preset…</button>
+        </div>
+      </div>
+
+      <div class="mapping-toolbar">
+        <input type="text" id="mapping-search" placeholder="Search mappings by name or trigger…" />
+        <div class="bulk-actions" id="bulk-actions" hidden>
+          <button class="btn" id="btn-bulk-enable">Enable selected</button>
+          <button class="btn" id="btn-bulk-disable">Disable selected</button>
+          <button class="btn" id="btn-bulk-clear">Clear selection</button>
+          <span class="bulk-count" id="bulk-count"></span>
+        </div>
+      </div>
+
+      <div id="mapping-list" class="mapping-list"></div>
+      <p class="empty-hint" id="mapping-empty" hidden>No mappings yet. Click <strong>+ New mapping</strong> to create one, or load a preset bundle to get started.</p>
+    </section>
+
+    <!-- Settings -->
+    <section class="panel" id="tab-settings">
+      <div style="background: var(--bg-secondary); padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0; margin-bottom: 8px;">Which console?</h3>
+        <p class="muted" style="margin: 0 0 12px 0; font-size: 13px;">Switch lighting consoles. Changes apply immediately — no restart needed.</p>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <label style="flex: 1; margin: 0;">
+            Console
+            <select id="settings-console-quick" style="width: 100%; max-width: 300px;"></select>
+          </label>
+          <span id="settings-console-status" class="muted" style="font-size: 11px; white-space: nowrap;">—</span>
+        </div>
+      </div>
+
+      <h2 id="settings-title">Network settings</h2>
+      <p class="muted" id="settings-intro">Match these to MA3 → Menu → Network → OSC. The listen port here must match MA3's "Output port", and MA3's "Input port" must match what you set as MA3 send port.</p>
+
+      <form id="form-settings" class="form-grid">
+        <fieldset class="span-2">
+          <legend>Console</legend>
+          <p class="muted" style="margin: 4px 0 10px;">
+            Which lighting console ENCpatch is controlling. Encoder ticks +
+            page buttons route through the matching protocol (Lua bridge for MA3,
+            OSC wheel keys for Eos, etc). v0.13.1+: changes apply live — no
+            restart needed.
+          </p>
+          <div class="row">
+            <label style="flex: 1;">Console
+              <select name="console" id="settings-console">
+                <option value="ma3">grandMA3 onPC</option>
+                <option value="eos">ETC Eos (Eos / Element / Ion / Nomad)</option>
+                <option value="magicq">Chamsys MagicQ (untested)</option>
+                <option value="onyx">Obsidian Onyx (untested, Windows only)</option>
+                <option value="titan">Avolites Titan (untested, Windows only)</option>
+                <option value="hog">Hog 5 / Hog 4PC (untested)</option>
+                <option value="vista">Jands Vista 3 (untested, Windows only)</option>
+              </select>
+            </label>
+            <label>Console host <input name="eos.host" placeholder="127.0.0.1" /></label>
+            <label>Send port <input name="eos.port" type="number" placeholder="8000" /></label>
+            <label>Listen port <input name="eos.localPort" type="number" placeholder="8002" /></label>
+            <label>Eos user <input name="eos.user" type="number" min="0" max="99" placeholder="1" /></label>
+            <label>Status <input id="console-status" disabled value="—" /></label>
+          </div>
+          <div class="row" style="margin-top: 8px;">
+            <label class="inline">
+              <input type="checkbox" name="eos.autoFillFromEos" />
+              Auto-fill encoders from Eos
+            </label>
+            <span class="muted" style="font-size: 11px;">
+              When ON, the SD encoders fill with whatever Eos has on its encoder
+              display in slots 1-4 (live from <code>/eos/out/active/wheel</code> feedback).
+              When OFF, the encoders use the per-category param lists below.
+              <strong>Try ON first</strong> for zero-config — if Eos returns the
+              same 4 params regardless of category, turn OFF and use the per-category map.
+            </span>
+          </div>
+          <div class="row" style="margin-top: 8px;">
+            <label class="inline">
+              <input type="checkbox" name="eos.useCustomEncoderMap" />
+              Use Custom Encoder Map (Eos Tab 40)
+            </label>
+            <span class="muted" style="font-size: 11px;">
+              Toggles Eos's Custom Encoder Map mode on connect. Set up a custom map in
+              Eos: <em>Tab 40 → New Map</em>, drop 4 wheels in your preferred order,
+              save. ENCpatch's 4 encoders then mirror that map exactly.
+            </span>
+          </div>
+          <div class="row" style="margin-top: 6px;">
+            <label style="flex: 1;">
+              Fixed encoder parameters (Eos)
+              <input name="eos.encoderParams" placeholder="e.g. intens, pan, tilt, zoom (comma-separated, leave blank to auto-follow Eos)" />
+            </label>
+            <span class="muted" style="font-size: 11px; max-width: 30%;">
+              Comma-separated list of 4 Eos parameter names. When set, the SD
+              encoders are hardcoded to those parameters and the LCD shows them
+              as static labels. Find parameter names in Eos Tab 7 (Virtual Keyboard).
+            </span>
+          </div>
+          <div class="row" style="margin-top: 8px;">
+            <button class="btn" id="btn-rerun-welcome" type="button">↻ Run setup again</button>
+            <span class="muted" style="font-size: 11px;">Re-opens the welcome modal so you can re-pick a console and walk through the steps.</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="span-2" id="eos-category-params-section">
+          <legend>Eos: encoder parameters per category</legend>
+          <p class="muted" style="margin: 4px 0 10px;">
+            When you press a category button on the Stream Deck (Intensity / Color / Image /
+            Focus / Shutter / Form), the 4 SD encoders auto-swap to the parameter names listed
+            below. Names are case-insensitive; use underscores for spaces (<code>color_select</code>
+            matches "Color Select"). Find valid names in Eos Tab 7 → "OSC /key Names" or in any
+            fixture's column headers in the Live Table. Each category supports up to <strong>3
+            pages of 4</strong> (12 params total) — fill in additional pages if your fixture has
+            more params in that category, then <strong>press the same category button again</strong>
+            on the SD to cycle to the next page. Empty trailing slots disable those pages (so a
+            4-param category stays single-page, an 8-param category gets 2 pages, 12 = 3 pages).
+            (LCD swipe still works as an alternate navigation method.)
+          </p>
+          <div id="eos-category-params-grid" class="enc-stacks-grid"></div>
+          <p class="muted" style="margin: 8px 0 0; font-size: 11px;">
+            Example: for the Rogue R2X Spot 21ch under Color, try
+            <code>Color_Select, Color_Wheel_Mode, Color_Select_2, Color_Wheel_Mode_2</code>.
+            Common errors: a typo'd or non-existent param name silently no-ops on Eos's side
+            (check Eos's Tab 99 Diagnostics for "ProcessWheelCommand invalid parameter name").
+          </p>
+        </fieldset>
+
+        <fieldset class="span-2" id="ma3-osc-section">
+          <legend>MA3 OSC ports</legend>
+          <p class="muted" style="margin: 4px 0 10px;">
+            Used only when the console is grandMA3. Match these to MA3 →
+            <em>Menu → Network → OSC</em>. The listen port here must match MA3's
+            "Output port", and MA3's "Input port" must match what you set as MA3
+            send port.
+          </p>
+          <div class="row">
+            <label style="flex: 1;">MA3 host (IP) <input name="osc.ma3Host" placeholder="127.0.0.1" /></label>
+            <label>MA3 send port (we → MA3) <input name="osc.ma3SendPort" type="number" placeholder="8000" /></label>
+            <label>Local listen port (MA3/controllers → us) <input name="osc.listenPort" type="number" placeholder="8001" /></label>
+            <label>UI port <input name="http.port" type="number" placeholder="8733" /></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="span-2" id="ma3-bridge-section">
+          <legend>MA3 Bridge plugin</legend>
+          <p class="muted" style="margin: 4px 0 10px;">
+            Required for fixture-agnostic encoder control. Save the plugin
+            below, import it in MA3 (<em>Menu → Plugins → +</em>), then
+            double-click to start. System Monitor should show
+            <code>[ENCpatch] listening on 127.0.0.1:9001</code>.
+          </p>
+          <div class="row" style="margin-bottom: 10px;">
+            <button class="btn btn-primary" id="btn-download-bridge" type="button">⬇ Save Bridge to Downloads</button>
+            <button class="btn" id="btn-copy-bridge" type="button">📋 Copy Lua source</button>
+            <button class="btn" id="btn-view-bridge" type="button">View source</button>
+            <span id="bridge-download-status" class="muted" style="font-size: 11px;"></span>
+          </div>
+          <div class="row">
+            <label class="inline">
+              <input type="checkbox" name="ma3lua.enabled" />
+              Enable Lua bridge
+            </label>
+            <label>Host <input name="ma3lua.host" placeholder="127.0.0.1" /></label>
+            <label>Port <input name="ma3lua.port" type="number" placeholder="9001" /></label>
+            <label>Status <input id="ma3lua-status" disabled value="—" /></label>
+          </div>
+          <div class="row">
+            <label style="flex: 1;">Auth token (LAN only — leave empty for 127.0.0.1)
+              <input name="ma3lua.token" placeholder="" autocomplete="off" />
+            </label>
+            <span class="muted" style="font-size: 11px; max-width: 50%;">
+              When ENCpatch and MA3 are on different machines, set the same token
+              here AND in <code>ENCpatchMA3Bridge.lua</code> (TOKEN constant near
+              the top). Required if you change the bridge's BIND_ADDR away from
+              <code>127.0.0.1</code> — otherwise anyone on the LAN can send
+              commands to MA3.
+            </span>
+          </div>
+          <div class="test-row" style="margin-top: 10px;">
+            <input id="test-lua-cmd" placeholder='e.g. Store Cue 5  /  Off Sequence Thru' />
+            <button class="btn" id="btn-test-lua" type="button">Send Lua command</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="span-2" id="encoder-stacks-section">
+          <legend>Encoder stacks (LCD tap → cycle)</legend>
+          <p class="muted" style="margin: 4px 0 10px;">
+            Tap the Stream Deck Plus LCD above an encoder to cycle through
+            stacked attributes. Define the cycle list per feature group + slot.
+            Comma-separated MA3 attribute names. Empty = no cycle (single
+            attribute on that slot).
+          </p>
+          <div class="row" style="margin-bottom: 8px; gap: 6px;">
+            <button class="btn btn-primary" id="btn-stacks-discover" type="button">⚡ Auto-fill from selection</button>
+            <button class="btn" id="btn-stacks-clear" type="button">Clear all entries</button>
+            <button class="btn" id="btn-stacks-defaults" type="button">Reset to defaults</button>
+            <span id="stacks-msg" class="muted" style="font-size: 11px;"></span>
+          </div>
+          <p class="muted" style="font-size: 11px; margin: 0 0 10px;">
+            <strong>Auto-fill</strong> reads the currently-selected fixture in MA3 and asks the bridge which
+            attributes are valid for each slot of the current feature group. Select fixtures of one type, pick
+            a feature (Color / Gobo / etc.), click Auto-fill, then Save. Repeat per fixture type.
+          </p>
+          <div id="encoder-stacks-grid" class="enc-stacks-grid"></div>
+          <p class="muted" style="margin: 8px 0 0; font-size: 11px;">
+            Examples: Color slot 1 = <code>Color1, Color1WheelSpin, Color1WheelShake</code>.
+            Gobo slot 1 = <code>Gobo1, Gobo1Pos, Gobo1WheelSpin</code>.
+            Names must match MA3's exact attribute spelling — check the bottom-of-screen edit dialog tab labels.
+          </p>
+        </fieldset>
+
+        <div class="span-2 actions">
+          <button class="btn primary" type="submit">Save settings</button>
+          <span class="muted" id="settings-saved-msg"></span>
+        </div>
+      </form>
+
+      <h3>Quick test</h3>
+      <div class="test-row">
+        <input id="test-osc-addr" placeholder="/Page1/Fader201" />
+        <input id="test-osc-val" placeholder="0.5" />
+        <select id="test-osc-type">
+          <option value="f">f (float)</option>
+          <option value="i">i (int)</option>
+          <option value="s">s (string)</option>
+          <option value="T">T (true)</option>
+          <option value="F">F (false)</option>
+        </select>
+        <button class="btn" id="btn-test-osc">Send to MA3</button>
+      </div>
+    </section>
+
+    <!-- Monitor -->
+    <section class="panel" id="tab-monitor">
+      <div class="panel-head">
+        <h2>Live monitor</h2>
+        <div class="head-actions">
+          <label class="inline"><input type="checkbox" id="monitor-pause" /> Pause</label>
+          <button class="btn" id="btn-clear-monitor">Clear</button>
+        </div>
+      </div>
+      <div id="monitor" class="monitor"></div>
+    </section>
+
+    <!-- Help -->
+    <section class="panel" id="tab-help">
+      <div class="panel-head">
+        <h2>Help</h2>
+        <input id="help-search" placeholder="Search topics, commands, attributes…" style="max-width: 380px;" />
+      </div>
+      <div id="help-results" class="help-results"></div>
+    </section>
+  </main>
+
+  <!-- Mapping editor (modal) -->
+  <div class="modal" id="mapping-modal" hidden>
+    <div class="modal-card">
+      <header><h3 id="mapping-modal-title">New mapping</h3>
+        <button class="btn icon" id="mapping-modal-close" aria-label="close">×</button>
+      </header>
+      <div class="modal-body">
+        <label>Name <input id="m-name" placeholder="e.g. Stream Deck btn 1 → Exec 201 Go" /></label>
+        <label class="inline"><input type="checkbox" id="m-enabled" checked /> Enabled</label>
+
+        <fieldset>
+          <legend>Trigger (incoming)</legend>
+          <div class="row">
+            <label>Source
+              <select id="m-trigger-type">
+                <option value="osc">OSC</option>
+              </select>
+            </label>
+            <label>Match
+              <input id="m-trigger-match" placeholder="/sd/page1/btn1   (or /^\/sd\/.*$/ for regex)" />
+            </label>
+            <label>From host (optional)
+              <input id="m-trigger-host" placeholder="any" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Transform</legend>
+          <div class="row">
+            <label>Arg index <input id="m-tx-arg" type="number" value="0" /></label>
+            <label>Input range <input id="m-tx-in" placeholder="0,1" /></label>
+            <label>Output range <input id="m-tx-out" placeholder="0,1" /></label>
+            <label>Curve
+              <select id="m-tx-curve">
+                <option value="linear">linear</option>
+                <option value="invert">invert</option>
+                <option value="log">log</option>
+                <option value="exp">exp</option>
+              </select>
+            </label>
+            <label>Only on (optional) <input id="m-tx-onlyon" placeholder="e.g. 1" /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Action (outgoing)</legend>
+          <div class="row">
+            <label>Type
+              <select id="m-action-type">
+                <option value="osc">OSC to MA3</option>
+                <option value="ma3lua">MA3 Lua plugin (TCP)</option>
+              </select>
+            </label>
+            <label>OSC address <input id="m-action-addr" placeholder="/Page1/Fader201" /></label>
+            <label>Arg type
+              <select id="m-action-argtype">
+                <option value="f">f (float)</option>
+                <option value="i">i (int)</option>
+                <option value="s">s (string)</option>
+                <option value="T">T (true)</option>
+                <option value="F">F (false)</option>
+              </select>
+            </label>
+            <label class="full">Lua command <input id="m-action-cmd" placeholder='e.g. Cmd("Attribute Dimmer At + 5")  — $value substituted' /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Feedback (MA3 → controller)</legend>
+          <label class="inline"><input type="checkbox" id="m-fb-enabled" /> Enable feedback</label>
+          <div class="row">
+            <label>MA3 OSC source <input id="m-fb-src" placeholder="/Page1/Fader201" /></label>
+            <label>Send to host <input id="m-fb-host" placeholder="127.0.0.1" /></label>
+            <label>Send to port <input id="m-fb-port" type="number" placeholder="9000" /></label>
+            <label>Send to address <input id="m-fb-addr" placeholder="/sd/page1/btn1/state" /></label>
+            <label>Arg type
+              <select id="m-fb-argtype">
+                <option value="f">f</option><option value="i">i</option><option value="s">s</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <footer>
+        <button class="btn" id="mapping-modal-cancel">Cancel</button>
+        <button class="btn primary" id="mapping-modal-save">Save</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

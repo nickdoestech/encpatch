@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "version": 1,
+    "comment": "Sample mapping config for ENCpatch. Copy fragments into config.json or paste into the UI's Visual Builder. Two flavors: (a) bridge-tick encoders for grandMA3 (fixture-agnostic — follows whatever's on MA3's encoder bar), (b) OSC fader-wing example for an external 24-fader controller."
+  },
+
+  "ma3_bridgeTick_streamDeckPlus": [
+    {
+      "id": "sd-enc-1-tick",
+      "name": "SD+ Encoder 1 → MA3 encoder bar slot 1",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/enc/1" },
+      "transform": { "mode": "linear", "coarseStep": 1, "fineStep": 0.1, "fromArgIndex": 0 },
+      "action": { "type": "bridgeTick", "encoder": 1 }
+    },
+    {
+      "id": "sd-enc-2-tick",
+      "name": "SD+ Encoder 2 → MA3 encoder bar slot 2",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/enc/2" },
+      "transform": { "mode": "linear", "coarseStep": 1, "fineStep": 0.1, "fromArgIndex": 0 },
+      "action": { "type": "bridgeTick", "encoder": 2 }
+    },
+    {
+      "id": "sd-enc-3-tick",
+      "name": "SD+ Encoder 3 → MA3 encoder bar slot 3",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/enc/3" },
+      "transform": { "mode": "linear", "coarseStep": 1, "fineStep": 0.1, "fromArgIndex": 0 },
+      "action": { "type": "bridgeTick", "encoder": 3 }
+    },
+    {
+      "id": "sd-enc-4-tick",
+      "name": "SD+ Encoder 4 → MA3 encoder bar slot 4",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/enc/4" },
+      "transform": { "mode": "linear", "coarseStep": 1, "fineStep": 0.1, "fromArgIndex": 0 },
+      "action": { "type": "bridgeTick", "encoder": 4 }
+    }
+  ],
+
+  "ma3_pageBank_select": [
+    {
+      "id": "page-dimmer",
+      "name": "SD+ button row L → Dimmer bank",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/btn/0/down" },
+      "action": { "type": "setPage", "page": "Dimmer", "bankIdx": 1 }
+    },
+    {
+      "id": "page-position",
+      "name": "SD+ button row L → Position bank",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/btn/1/down" },
+      "action": { "type": "setPage", "page": "Position", "bankIdx": 2 }
+    },
+    {
+      "id": "page-color",
+      "name": "SD+ button row L → Color bank",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/btn/2/down" },
+      "action": { "type": "setPage", "page": "Color", "bankIdx": 3 }
+    }
+  ],
+
+  "osc_fader_wing_24": [
+    {
+      "id": "wing-fader-1",
+      "name": "Wing fader 1 → MA3 exec 101",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/1" },
+      "transform": { "mode": "linear", "fromArgIndex": 0, "inputRange": [0, 1], "outputRange": [0, 100] },
+      "action": { "type": "cmd", "template": "Master 1.1.1 At $abs", "throttleMs": 50 }
+    }
+  ],
+
+  "eos_wheel_examples": [
+    {
+      "id": "eos-enc-1",
+      "name": "SD+ Encoder 1 → Eos wheel 1",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/sd/enc/1" },
+      "transform": { "mode": "linear", "coarseStep": 1, "fineStep": 0.25, "fromArgIndex": 0 },
+      "action": { "type": "bridgeTick", "encoder": 1 }
+    }
+  ]
+}

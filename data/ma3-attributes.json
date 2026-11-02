@@ -1,0 +1,246 @@
+{
+  "_about": "MA3 attribute catalog. Each entry generates an OSC /cmd template the engine sends per encoder tick. Coarse step = 0.5 (default per tick). Fine = 0.1 (when encoder push held / fine mode active).",
+  "_template": "Attribute \"{name}\" At $sign $abs",
+  "groups": [
+    {
+      "group": "Intensity",
+      "ma3Page": "Dimmer",
+      "attributes": [
+        { "name": "Dimmer", "label": "Dim", "use": "Main brightness" }
+      ]
+    },
+    {
+      "group": "Position",
+      "ma3Page": "Position",
+      "attributes": [
+        { "name": "Pan",         "label": "Pan",       "use": "Horizontal" },
+        { "name": "Tilt",        "label": "Tilt",      "use": "Vertical" },
+        { "name": "Pan_Phaser",  "label": "Pan Phsr",  "use": "Pan phaser" },
+        { "name": "Tilt_Phaser", "label": "Tilt Phsr", "use": "Tilt phaser" }
+      ]
+    },
+    {
+      "group": "Color (RGB)",
+      "ma3Page": "Color",
+      "attributes": [
+        { "name": "ColorRGB_R", "label": "R",     "use": "Red (additive)" },
+        { "name": "ColorRGB_G", "label": "G",     "use": "Green (additive)" },
+        { "name": "ColorRGB_B", "label": "B",     "use": "Blue (additive)" },
+        { "name": "ColorRGB_W", "label": "W",     "use": "White" }
+      ]
+    },
+    {
+      "group": "Color (CMY)",
+      "ma3Page": "Color",
+      "attributes": [
+        { "name": "Cyan",    "label": "C",   "use": "Cyan (subtractive)" },
+        { "name": "Magenta", "label": "M",   "use": "Magenta (subtractive)" },
+        { "name": "Yellow",  "label": "Y",   "use": "Yellow (subtractive)" },
+        { "name": "CTO",     "label": "CTO", "use": "Color temp orange" },
+        { "name": "CTC",     "label": "CTC", "use": "Color temp correction" }
+      ]
+    },
+    {
+      "group": "Color (Wheel)",
+      "ma3Page": "Color",
+      "attributes": [
+        { "name": "Color1", "label": "Col1", "use": "Fixed color wheel 1" },
+        { "name": "Color2", "label": "Col2", "use": "Fixed color wheel 2" }
+      ]
+    },
+    {
+      "group": "Gobo",
+      "ma3Page": "Gobo",
+      "attributes": [
+        { "name": "Gobo1",     "label": "G1",     "use": "Gobo wheel 1 select" },
+        { "name": "Gobo1_Rot", "label": "G1 Rot", "use": "Gobo 1 rotation/index" },
+        { "name": "Gobo2",     "label": "G2",     "use": "Gobo wheel 2 select" },
+        { "name": "Gobo2_Rot", "label": "G2 Rot", "use": "Gobo 2 rotation/index" }
+      ]
+    },
+    {
+      "group": "Beam",
+      "ma3Page": "Beam",
+      "attributes": [
+        { "name": "Iris",   "label": "Iris",  "use": "Beam diameter" },
+        { "name": "Zoom",   "label": "Zoom",  "use": "Field angle" },
+        { "name": "Focus",  "label": "Focus", "use": "Sharpness" },
+        { "name": "Frost1", "label": "Frst1", "use": "Diffusion 1" },
+        { "name": "Frost2", "label": "Frst2", "use": "Diffusion 2" }
+      ]
+    },
+    {
+      "group": "Prism",
+      "ma3Page": "Beam",
+      "attributes": [
+        { "name": "Prism1",     "label": "Prism",     "use": "Prism select" },
+        { "name": "Prism1_Rot", "label": "Prism Rot", "use": "Prism rotation" }
+      ]
+    },
+    {
+      "group": "Shapers",
+      "ma3Page": "Shapers",
+      "attributes": [
+        { "name": "Shaper1",        "label": "Bld1",     "use": "Blade 1 insertion" },
+        { "name": "Shaper1_Rot",    "label": "Bld1 Rot", "use": "Blade 1 angle" },
+        { "name": "Shaper2",        "label": "Bld2",     "use": "Blade 2 insertion" },
+        { "name": "Shaper2_Rot",    "label": "Bld2 Rot", "use": "Blade 2 angle" },
+        { "name": "Shaper3",        "label": "Bld3",     "use": "Blade 3 insertion" },
+        { "name": "Shaper3_Rot",    "label": "Bld3 Rot", "use": "Blade 3 angle" },
+        { "name": "Shaper4",        "label": "Bld4",     "use": "Blade 4 insertion" },
+        { "name": "Shaper4_Rot",    "label": "Bld4 Rot", "use": "Blade 4 angle" },
+        { "name": "ShaperAll_Rot",  "label": "Frame Rot","use": "Whole shaper assembly rotation" }
+      ]
+    }
+  ],
+  "pageMap": {
+    "Dimmer":   ["Dimmer",     null,         null,         null],
+    "Position": ["Pan",         "Tilt",       "Pan_Phaser", "Tilt_Phaser"],
+    "Gobo":     ["Gobo1",       "Gobo1_Rot",  "Gobo2",      "Gobo2_Rot"],
+    "Color":    ["ColorRGB_R",  "ColorRGB_G", "ColorRGB_B", "ColorRGB_W"],
+    "Beam":     ["Iris",        "Zoom",       "Prism1",     "Prism1_Rot"],
+    "Focus":    ["Focus",       "Frost1",     "Frost2",     null],
+    "Control":  [null,          null,         null,         null],
+    "Shapers":  ["Shaper1",     "Shaper1_Rot","Shaper2",    "ShaperAll_Rot"]
+  },
+  "bankOrder": ["Dimmer", "Position", "Gobo", "Color", "Beam", "Focus", "Control", "Shapers"],
+  "_featureAliases_about": "MA3's internal feature group names (returned by SelectedFeature()) differ from the friendly page names we use. Comprehensive alias list — add to it here when a new MA3 feature name shows up unmatched. Left = MA3's name, right = our page (Dimmer/Position/Gobo/Color/Beam/Focus/Control/Shapers).",
+  "featureAliases": {
+    "Dimmer":              "Dimmer",
+    "Dim":                 "Dimmer",
+    "Intensity":           "Dimmer",
+    "DimmerCurve":         "Dimmer",
+
+    "PanTilt":             "Position",
+    "Pan":                 "Position",
+    "Tilt":                "Position",
+    "XYZ":                 "Position",
+    "XYZ_Position":        "Position",
+    "XYZ_Rotate":          "Position",
+    "XYZ_Rotation":        "Position",
+    "Position":            "Position",
+    "PositionMSpeed":      "Position",
+    "PanRotate":           "Position",
+    "TiltRotate":          "Position",
+
+    "Gobo":                "Gobo",
+    "Gobo1":               "Gobo",
+    "Gobo2":               "Gobo",
+    "GoboWheel":           "Gobo",
+    "GoboSelect":          "Gobo",
+    "GoboPosition":        "Gobo",
+    "GoboRotation":        "Gobo",
+    "GoboRotationSpeed":   "Gobo",
+    "GoboShake":           "Gobo",
+    "AnimationWheel":      "Gobo",
+    "Effects":             "Gobo",
+    "EffectsWheel":        "Gobo",
+
+    "Color":               "Color",
+    "RGB":                 "Color",
+    "CMY":                 "Color",
+    "HSI":                 "Color",
+    "HSB":                 "Color",
+    "RGBW":                "Color",
+    "RGBA":                "Color",
+    "RGBAW":               "Color",
+    "RGBAWUV":             "Color",
+    "ColorRGB":            "Color",
+    "ColorMix":            "Color",
+    "ColorMixer":          "Color",
+    "ColorMacro":          "Color",
+    "ColorEffects":        "Color",
+    "ColorTemperature":    "Color",
+    "ColorTint":           "Color",
+    "ColorHSI":            "Color",
+    "ColorHSB":            "Color",
+    "ColorWheel":          "Color",
+    "ColorWheelSelect":    "Color",
+    "ColorWheelSpeed":     "Color",
+    "Color1":              "Color",
+    "Color2":              "Color",
+    "Color3":              "Color",
+    "ColorAdd":            "Color",
+    "ColorSub":            "Color",
+    "CTC":                 "Color",
+    "CTO":                 "Color",
+    "CTB":                 "Color",
+
+    "Beam":                "Beam",
+    "BeamGeneral":         "Beam",
+    "Iris":                "Beam",
+    "IrisStrobe":          "Beam",
+    "IrisShake":           "Beam",
+    "Zoom":                "Beam",
+    "ZoomMSpeed":          "Beam",
+    "Shutter":             "Beam",
+    "Shutter1":            "Beam",
+    "Strobe":              "Beam",
+    "Strobe1":             "Beam",
+    "StrobeRate":          "Beam",
+    "Prism":               "Beam",
+    "Prism1":              "Beam",
+    "Prism2":              "Beam",
+    "PrismRotation":       "Beam",
+    "PrismPosition":       "Beam",
+    "BeamFx":              "Beam",
+    "BeamShape":           "Beam",
+
+    "Focus":               "Focus",
+    "Focus1":              "Focus",
+    "Focus2":              "Focus",
+    "FocusGeneral":        "Focus",
+    "AutoFocus":           "Focus",
+    "ZoomFocus":           "Focus",
+    "Frost":               "Focus",
+    "Frost1":              "Focus",
+    "Frost2":              "Focus",
+    "Haze":                "Focus",
+
+    "Control":             "Control",
+    "Control1":            "Control",
+    "Control2":            "Control",
+    "ControlGeneral":      "Control",
+    "Function":            "Control",
+    "Macro":               "Control",
+    "Macros":              "Control",
+    "Lamp":                "Control",
+    "LampControl":         "Control",
+    "Reset":               "Control",
+    "ResetGeneral":        "Control",
+    "Effect":              "Control",
+    "EffectMacro":         "Control",
+    "Maintenance":         "Control",
+    "DisplayIntensity":    "Control",
+    "Fan":                 "Control",
+    "FanMode":             "Control",
+
+    "Shapers":             "Shapers",
+    "ShapersAll":          "Shapers",
+    "Shaper":              "Shapers",
+    "Shaper1":             "Shapers",
+    "Shaper2":             "Shapers",
+    "Shaper3":             "Shapers",
+    "Shaper4":             "Shapers",
+    "ShapersRot":          "Shapers",
+    "Blade":               "Shapers",
+    "Blade1":              "Shapers",
+    "Blade1A":             "Shapers",
+    "Blade1B":             "Shapers",
+    "Blade2":              "Shapers",
+    "Blade2A":             "Shapers",
+    "Blade2B":             "Shapers",
+    "Blade3":              "Shapers",
+    "Blade3A":             "Shapers",
+    "Blade3B":             "Shapers",
+    "Blade4":              "Shapers",
+    "Blade4A":             "Shapers",
+    "Blade4B":             "Shapers",
+    "BladeRotation":       "Shapers",
+    "BladeAll":            "Shapers",
+    "Knife":               "Shapers",
+    "Frame":               "Shapers",
+    "FrameRotation":       "Shapers",
+    "Mask":                "Shapers"
+  }
+}

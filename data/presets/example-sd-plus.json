@@ -1,0 +1,14 @@
+{
+  "name": "Stream Deck + → MA3 onPC starter",
+  "description": "All 4 SD+ encoders → MA3 faders 201..204 with feedback. Keys 1..4 → Go on Sequences 1..4.",
+  "mappings": [
+    { "name": "Enc 1 → Fader 201", "trigger": { "type": "osc", "match": "/sd/enc/1" }, "transform": { "mode": "accumulate", "step": 0.02, "outputRange": [0,1] }, "action": { "type": "osc", "address": "/Page1/Fader201", "argType": "f" }, "feedback": { "enabled": true, "ma3Source": { "type": "osc", "match": "/Page1/Fader201" }, "transform": { "inputRange": [0,1], "outputRange": [0,1], "curve": "linear" }, "destination": { "type": "osc", "host": "127.0.0.1", "port": 8001, "address": "/sd/enc/1/state", "argType": "f" } } },
+    { "name": "Enc 2 → Fader 202", "trigger": { "type": "osc", "match": "/sd/enc/2" }, "transform": { "mode": "accumulate", "step": 0.02, "outputRange": [0,1] }, "action": { "type": "osc", "address": "/Page1/Fader202", "argType": "f" } },
+    { "name": "Enc 3 → Fader 203", "trigger": { "type": "osc", "match": "/sd/enc/3" }, "transform": { "mode": "accumulate", "step": 0.02, "outputRange": [0,1] }, "action": { "type": "osc", "address": "/Page1/Fader203", "argType": "f" } },
+    { "name": "Enc 4 → Fader 204", "trigger": { "type": "osc", "match": "/sd/enc/4" }, "transform": { "mode": "accumulate", "step": 0.02, "outputRange": [0,1] }, "action": { "type": "osc", "address": "/Page1/Fader204", "argType": "f" } },
+    { "name": "Key 1 → Go Seq 1", "trigger": { "type": "osc", "match": "/sd/key/1" }, "transform": { "onlyOn": 1 }, "action": { "type": "osc", "address": "/Page1/Key201", "argType": "f" } },
+    { "name": "Key 2 → Go Seq 2", "trigger": { "type": "osc", "match": "/sd/key/2" }, "transform": { "onlyOn": 1 }, "action": { "type": "osc", "address": "/Page1/Key202", "argType": "f" } },
+    { "name": "Key 3 → Go Seq 3", "trigger": { "type": "osc", "match": "/sd/key/3" }, "transform": { "onlyOn": 1 }, "action": { "type": "osc", "address": "/Page1/Key203", "argType": "f" } },
+    { "name": "Key 4 → Go Seq 4", "trigger": { "type": "osc", "match": "/sd/key/4" }, "transform": { "onlyOn": 1 }, "action": { "type": "osc", "address": "/Page1/Key204", "argType": "f" } }
+  ]
+}

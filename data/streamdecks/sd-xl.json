@@ -1,0 +1,43 @@
+{
+  "id": "sd-xl",
+  "name": "Stream Deck XL (emulator)",
+  "description": "32 keys (4 rows x 8 columns).",
+  "viewBox": [0, 0, 1060, 540],
+  "controls": [
+    { "id": "k0",  "kind": "key", "label": "1",  "addressTemplate": "/sd/key/1",  "x": 20,  "y": 20,  "w": 120, "h": 120 },
+    { "id": "k1",  "kind": "key", "label": "2",  "addressTemplate": "/sd/key/2",  "x": 150, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k2",  "kind": "key", "label": "3",  "addressTemplate": "/sd/key/3",  "x": 280, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k3",  "kind": "key", "label": "4",  "addressTemplate": "/sd/key/4",  "x": 410, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k4",  "kind": "key", "label": "5",  "addressTemplate": "/sd/key/5",  "x": 540, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k5",  "kind": "key", "label": "6",  "addressTemplate": "/sd/key/6",  "x": 670, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k6",  "kind": "key", "label": "7",  "addressTemplate": "/sd/key/7",  "x": 800, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k7",  "kind": "key", "label": "8",  "addressTemplate": "/sd/key/8",  "x": 930, "y": 20,  "w": 120, "h": 120 },
+
+    { "id": "k8",  "kind": "key", "label": "9",  "addressTemplate": "/sd/key/9",  "x": 20,  "y": 150, "w": 120, "h": 120 },
+    { "id": "k9",  "kind": "key", "label": "10", "addressTemplate": "/sd/key/10", "x": 150, "y": 150, "w": 120, "h": 120 },
+    { "id": "k10", "kind": "key", "label": "11", "addressTemplate": "/sd/key/11", "x": 280, "y": 150, "w": 120, "h": 120 },
+    { "id": "k11", "kind": "key", "label": "12", "addressTemplate": "/sd/key/12", "x": 410, "y": 150, "w": 120, "h": 120 },
+    { "id": "k12", "kind": "key", "label": "13", "addressTemplate": "/sd/key/13", "x": 540, "y": 150, "w": 120, "h": 120 },
+    { "id": "k13", "kind": "key", "label": "14", "addressTemplate": "/sd/key/14", "x": 670, "y": 150, "w": 120, "h": 120 },
+    { "id": "k14", "kind": "key", "label": "15", "addressTemplate": "/sd/key/15", "x": 800, "y": 150, "w": 120, "h": 120 },
+    { "id": "k15", "kind": "key", "label": "16", "addressTemplate": "/sd/key/16", "x": 930, "y": 150, "w": 120, "h": 120 },
+
+    { "id": "k16", "kind": "key", "label": "17", "addressTemplate": "/sd/key/17", "x": 20,  "y": 280, "w": 120, "h": 120 },
+    { "id": "k17", "kind": "key", "label": "18", "addressTemplate": "/sd/key/18", "x": 150, "y": 280, "w": 120, "h": 120 },
+    { "id": "k18", "kind": "key", "label": "19", "addressTemplate": "/sd/key/19", "x": 280, "y": 280, "w": 120, "h": 120 },
+    { "id": "k19", "kind": "key", "label": "20", "addressTemplate": "/sd/key/20", "x": 410, "y": 280, "w": 120, "h": 120 },
+    { "id": "k20", "kind": "key", "label": "21", "addressTemplate": "/sd/key/21", "x": 540, "y": 280, "w": 120, "h": 120 },
+    { "id": "k21", "kind": "key", "label": "22", "addressTemplate": "/sd/key/22", "x": 670, "y": 280, "w": 120, "h": 120 },
+    { "id": "k22", "kind": "key", "label": "23", "addressTemplate": "/sd/key/23", "x": 800, "y": 280, "w": 120, "h": 120 },
+    { "id": "k23", "kind": "key", "label": "24", "addressTemplate": "/sd/key/24", "x": 930, "y": 280, "w": 120, "h": 120 },
+
+    { "id": "k24", "kind": "key", "label": "25", "addressTemplate": "/sd/key/25", "x": 20,  "y": 410, "w": 120, "h": 120 },
+    { "id": "k25", "kind": "key", "label": "26", "addressTemplate": "/sd/key/26", "x": 150, "y": 410, "w": 120, "h": 120 },
+    { "id": "k26", "kind": "key", "label": "27", "addressTemplate": "/sd/key/27", "x": 280, "y": 410, "w": 120, "h": 120 },
+    { "id": "k27", "kind": "key", "label": "28", "addressTemplate": "/sd/key/28", "x": 410, "y": 410, "w": 120, "h": 120 },
+    { "id": "k28", "kind": "key", "label": "29", "addressTemplate": "/sd/key/29", "x": 540, "y": 410, "w": 120, "h": 120 },
+    { "id": "k29", "kind": "key", "label": "30", "addressTemplate": "/sd/key/30", "x": 670, "y": 410, "w": 120, "h": 120 },
+    { "id": "k30", "kind": "key", "label": "31", "addressTemplate": "/sd/key/31", "x": 800, "y": 410, "w": 120, "h": 120 },
+    { "id": "k31", "kind": "key", "label": "32", "addressTemplate": "/sd/key/32", "x": 930, "y": 410, "w": 120, "h": 120 }
+  ]
+}

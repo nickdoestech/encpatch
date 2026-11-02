@@ -1,0 +1,76 @@
+{
+  "id": "ma3-light",
+  "name": "grandMA3 Light (compact console)",
+  "description": "Layout for MA3 Light compact desk. Smaller encoder bar and 10-fader layout. Address scheme: /Page{N}/Fader2XX, /Page{N}/Key2XX, /Encoder/<Name>.",
+  "viewBox": [0, 0, 750, 500],
+  "supportsPages": true,
+  "defaultPage": 1,
+  "sections": [
+    {
+      "name": "Encoder bar",
+      "y": 18,
+      "controls": [
+        { "id": "enc1", "kind": "encoder", "label": "E1", "addressTemplate": "/Encoder/Dim",    "x": 50,  "y": 18, "w": 60, "h": 60 },
+        { "id": "enc2", "kind": "encoder", "label": "E2", "addressTemplate": "/Encoder/PanRot", "x": 120, "y": 18, "w": 60, "h": 60 },
+        { "id": "enc3", "kind": "encoder", "label": "E3", "addressTemplate": "/Encoder/Tilt",   "x": 190, "y": 18, "w": 60, "h": 60 },
+        { "id": "enc4", "kind": "encoder", "label": "E4", "addressTemplate": "/Encoder/Zoom",   "x": 260, "y": 18, "w": 60, "h": 60 }
+      ]
+    },
+    {
+      "name": "Fader execs (10-col)",
+      "controls": [
+        { "id": "key201",   "kind": "key",   "label": "201", "addressTemplate": "/Page{P}/Key201",        "x":  30, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader201", "kind": "fader", "label": "F201","addressTemplate": "/Page{P}/Fader201",      "x":  30, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash201", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader201Flash", "x":  30, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key202",   "kind": "key",   "label": "202", "addressTemplate": "/Page{P}/Key202",        "x":  80, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader202", "kind": "fader", "label": "F202","addressTemplate": "/Page{P}/Fader202",      "x":  80, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash202", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader202Flash", "x":  80, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key203",   "kind": "key",   "label": "203", "addressTemplate": "/Page{P}/Key203",        "x": 130, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader203", "kind": "fader", "label": "F203","addressTemplate": "/Page{P}/Fader203",      "x": 130, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash203", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader203Flash", "x": 130, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key204",   "kind": "key",   "label": "204", "addressTemplate": "/Page{P}/Key204",        "x": 180, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader204", "kind": "fader", "label": "F204","addressTemplate": "/Page{P}/Fader204",      "x": 180, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash204", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader204Flash", "x": 180, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key205",   "kind": "key",   "label": "205", "addressTemplate": "/Page{P}/Key205",        "x": 230, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader205", "kind": "fader", "label": "F205","addressTemplate": "/Page{P}/Fader205",      "x": 230, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash205", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader205Flash", "x": 230, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key206",   "kind": "key",   "label": "206", "addressTemplate": "/Page{P}/Key206",        "x": 280, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader206", "kind": "fader", "label": "F206","addressTemplate": "/Page{P}/Fader206",      "x": 280, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash206", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader206Flash", "x": 280, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key207",   "kind": "key",   "label": "207", "addressTemplate": "/Page{P}/Key207",        "x": 330, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader207", "kind": "fader", "label": "F207","addressTemplate": "/Page{P}/Fader207",      "x": 330, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash207", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader207Flash", "x": 330, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key208",   "kind": "key",   "label": "208", "addressTemplate": "/Page{P}/Key208",        "x": 380, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader208", "kind": "fader", "label": "F208","addressTemplate": "/Page{P}/Fader208",      "x": 380, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash208", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader208Flash", "x": 380, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key209",   "kind": "key",   "label": "209", "addressTemplate": "/Page{P}/Key209",        "x": 430, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader209", "kind": "fader", "label": "F209","addressTemplate": "/Page{P}/Fader209",      "x": 430, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash209", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader209Flash", "x": 430, "y": 390, "w": 42, "h": 24 },
+
+        { "id": "key210",   "kind": "key",   "label": "210", "addressTemplate": "/Page{P}/Key210",        "x": 480, "y": 110, "w": 42, "h": 28 },
+        { "id": "fader210", "kind": "fader", "label": "F210","addressTemplate": "/Page{P}/Fader210",      "x": 480, "y": 145, "w": 42, "h": 240 },
+        { "id": "flash210", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader210Flash", "x": 480, "y": 390, "w": 42, "h": 24 }
+      ]
+    },
+    {
+      "name": "Master & command keys",
+      "controls": [
+        { "id": "masterFader", "kind": "fader", "label": "GM",   "addressTemplate": "/Master1.1",      "x": 560, "y": 145, "w": 42, "h": 240 },
+        { "id": "masterGo",    "kind": "key",   "label": "Go",   "addressTemplate": "/CmdKey/Go",      "x": 560, "y": 110, "w": 42, "h": 28 },
+        { "id": "masterPause", "kind": "key",   "label": "Paus", "addressTemplate": "/CmdKey/Pause",   "x": 560, "y": 390, "w": 42, "h": 24 },
+        { "id": "store",       "kind": "key",   "label": "Store","addressTemplate": "/CmdKey/Store",   "x": 620, "y": 110, "w": 42, "h": 28 },
+        { "id": "clear",       "kind": "key",   "label": "Clear","addressTemplate": "/CmdKey/Clear",   "x": 620, "y": 145, "w": 42, "h": 28 },
+        { "id": "off",         "kind": "key",   "label": "Off",  "addressTemplate": "/CmdKey/Off",     "x": 620, "y": 180, "w": 42, "h": 28 },
+        { "id": "esc",         "kind": "key",   "label": "Esc",  "addressTemplate": "/CmdKey/Esc",     "x": 620, "y": 215, "w": 42, "h": 28 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "id": "eos-ion",
+  "name": "ETC Ion / Ion XE (Eos family)",
+  "description": "Reference layout for the ETC Ion command surface. Address scheme uses Eos OSC: /eos/key/<name> for hardkeys, /eos/wheel/<n> for the four encoder wheels, /eos/sub/<n> for submasters, /eos/fader/<page>/<idx> for fader banks. Compatible with Element/Ion/Ti/Nomad — Element has fewer faders, Nomad has none. Edit this file to extend.",
+  "viewBox": [0, 0, 1280, 540],
+  "supportsPages": false,
+  "sections": [
+    {
+      "name": "Encoder wheels",
+      "controls": [
+        { "id": "wheel1", "kind": "encoder", "label": "Wheel 1", "addressTemplate": "/eos/wheel/1", "x": 60,  "y": 18, "w": 80, "h": 80 },
+        { "id": "wheel2", "kind": "encoder", "label": "Wheel 2", "addressTemplate": "/eos/wheel/2", "x": 155, "y": 18, "w": 80, "h": 80 },
+        { "id": "wheel3", "kind": "encoder", "label": "Wheel 3", "addressTemplate": "/eos/wheel/3", "x": 250, "y": 18, "w": 80, "h": 80 },
+        { "id": "wheel4", "kind": "encoder", "label": "Wheel 4", "addressTemplate": "/eos/wheel/4", "x": 345, "y": 18, "w": 80, "h": 80 }
+      ]
+    },
+    {
+      "name": "Category keys",
+      "controls": [
+        { "id": "intens", "kind": "key", "label": "Intens",  "addressTemplate": "/eos/key/intens",  "x": 460, "y": 18, "w": 80, "h": 32 },
+        { "id": "focus",  "kind": "key", "label": "Focus",   "addressTemplate": "/eos/key/focus",   "x": 460, "y": 56, "w": 80, "h": 32 },
+        { "id": "color",  "kind": "key", "label": "Color",   "addressTemplate": "/eos/key/color",   "x": 545, "y": 18, "w": 80, "h": 32 },
+        { "id": "shutter","kind": "key", "label": "Shutter", "addressTemplate": "/eos/key/shutter", "x": 545, "y": 56, "w": 80, "h": 32 },
+        { "id": "image",  "kind": "key", "label": "Image",   "addressTemplate": "/eos/key/image",   "x": 630, "y": 18, "w": 80, "h": 32 },
+        { "id": "form",   "kind": "key", "label": "Form",    "addressTemplate": "/eos/key/form",    "x": 630, "y": 56, "w": 80, "h": 32 },
+        { "id": "fx",     "kind": "key", "label": "Effect",  "addressTemplate": "/eos/key/effect",  "x": 715, "y": 18, "w": 80, "h": 32 },
+        { "id": "custom", "kind": "key", "label": "Custom",  "addressTemplate": "/eos/key/custom",  "x": 715, "y": 56, "w": 80, "h": 32 }
+      ]
+    },
+    {
+      "name": "Numeric keypad",
+      "controls": [
+        { "id": "n7", "kind": "key", "label": "7", "addressTemplate": "/eos/key/7", "x": 60,  "y": 130, "w": 56, "h": 40 },
+        { "id": "n8", "kind": "key", "label": "8", "addressTemplate": "/eos/key/8", "x": 122, "y": 130, "w": 56, "h": 40 },
+        { "id": "n9", "kind": "key", "label": "9", "addressTemplate": "/eos/key/9", "x": 184, "y": 130, "w": 56, "h": 40 },
+        { "id": "n4", "kind": "key", "label": "4", "addressTemplate": "/eos/key/4", "x": 60,  "y": 175, "w": 56, "h": 40 },
+        { "id": "n5", "kind": "key", "label": "5", "addressTemplate": "/eos/key/5", "x": 122, "y": 175, "w": 56, "h": 40 },
+        { "id": "n6", "kind": "key", "label": "6", "addressTemplate": "/eos/key/6", "x": 184, "y": 175, "w": 56, "h": 40 },
+        { "id": "n1", "kind": "key", "label": "1", "addressTemplate": "/eos/key/1", "x": 60,  "y": 220, "w": 56, "h": 40 },
+        { "id": "n2", "kind": "key", "label": "2", "addressTemplate": "/eos/key/2", "x": 122, "y": 220, "w": 56, "h": 40 },
+        { "id": "n3", "kind": "key", "label": "3", "addressTemplate": "/eos/key/3", "x": 184, "y": 220, "w": 56, "h": 40 },
+        { "id": "n0",  "kind": "key", "label": "0", "addressTemplate": "/eos/key/0",     "x": 60,  "y": 265, "w": 118, "h": 40 },
+        { "id": "ndot","kind": "key", "label": ".", "addressTemplate": "/eos/key/decimal","x": 184, "y": 265, "w": 56,  "h": 40 }
+      ]
+    },
+    {
+      "name": "Command keys",
+      "controls": [
+        { "id": "thru",   "kind": "key", "label": "Thru",  "addressTemplate": "/eos/key/thru",   "x": 250, "y": 130, "w": 70, "h": 40 },
+        { "id": "kplus",  "kind": "key", "label": "+",     "addressTemplate": "/eos/key/plus",   "x": 326, "y": 130, "w": 56, "h": 40 },
+        { "id": "kminus", "kind": "key", "label": "-",     "addressTemplate": "/eos/key/minus",  "x": 388, "y": 130, "w": 56, "h": 40 },
+        { "id": "at",     "kind": "key", "label": "At",    "addressTemplate": "/eos/key/at",     "x": 250, "y": 175, "w": 70, "h": 40 },
+        { "id": "full",   "kind": "key", "label": "Full",  "addressTemplate": "/eos/key/full",   "x": 326, "y": 175, "w": 56, "h": 40 },
+        { "id": "out",    "kind": "key", "label": "Out",   "addressTemplate": "/eos/key/out",    "x": 388, "y": 175, "w": 56, "h": 40 },
+        { "id": "kenter", "kind": "key", "label": "Enter", "addressTemplate": "/eos/key/enter",  "x": 250, "y": 220, "w": 132, "h": 85 },
+        { "id": "clear",  "kind": "key", "label": "Clear", "addressTemplate": "/eos/key/clear",  "x": 388, "y": 220, "w": 56,  "h": 40 },
+        { "id": "select", "kind": "key", "label": "Select","addressTemplate": "/eos/key/select", "x": 388, "y": 265, "w": 56,  "h": 40 }
+      ]
+    },
+    {
+      "name": "Display & navigation",
+      "controls": [
+        { "id": "live",   "kind": "key", "label": "Live",   "addressTemplate": "/eos/key/live",    "x": 460, "y": 130, "w": 70, "h": 40 },
+        { "id": "blind",  "kind": "key", "label": "Blind",  "addressTemplate": "/eos/key/blind",   "x": 536, "y": 130, "w": 70, "h": 40 },
+        { "id": "format", "kind": "key", "label": "Format", "addressTemplate": "/eos/key/format",  "x": 612, "y": 130, "w": 70, "h": 40 },
+        { "id": "displays","kind":"key", "label": "Displays","addressTemplate":"/eos/key/displays","x": 688, "y": 130, "w": 70, "h": 40 },
+        { "id": "patch",  "kind": "key", "label": "Patch",  "addressTemplate": "/eos/key/patch",   "x": 460, "y": 175, "w": 70, "h": 40 },
+        { "id": "group",  "kind": "key", "label": "Group",  "addressTemplate": "/eos/key/group",   "x": 536, "y": 175, "w": 70, "h": 40 },
+        { "id": "macro",  "kind": "key", "label": "Macro",  "addressTemplate": "/eos/key/macro",   "x": 612, "y": 175, "w": 70, "h": 40 },
+        { "id": "preset", "kind": "key", "label": "Preset", "addressTemplate": "/eos/key/preset",  "x": 688, "y": 175, "w": 70, "h": 40 },
+        { "id": "cue",    "kind": "key", "label": "Cue",    "addressTemplate": "/eos/key/cue",     "x": 460, "y": 220, "w": 70, "h": 40 },
+        { "id": "list",   "kind": "key", "label": "List",   "addressTemplate": "/eos/key/list",    "x": 536, "y": 220, "w": 70, "h": 40 },
+        { "id": "update", "kind": "key", "label": "Update", "addressTemplate": "/eos/key/update",  "x": 612, "y": 220, "w": 70, "h": 40 },
+        { "id": "delete", "kind": "key", "label": "Delete", "addressTemplate": "/eos/key/delete",  "x": 688, "y": 220, "w": 70, "h": 40 },
+        { "id": "last",   "kind": "key", "label": "Last",   "addressTemplate": "/eos/key/last",    "x": 460, "y": 265, "w": 70, "h": 40 },
+        { "id": "next",   "kind": "key", "label": "Next",   "addressTemplate": "/eos/key/next",    "x": 536, "y": 265, "w": 70, "h": 40 },
+        { "id": "highlight","kind":"key","label": "Hilite", "addressTemplate": "/eos/key/highlight","x":612, "y": 265, "w": 70, "h": 40 },
+        { "id": "park",   "kind": "key", "label": "Park",   "addressTemplate": "/eos/key/park",    "x": 688, "y": 265, "w": 70, "h": 40 }
+      ]
+    },
+    {
+      "name": "Submasters",
+      "controls": [
+        { "id": "sub1",  "kind": "fader", "label": "Sub 1",  "addressTemplate": "/eos/sub/1",  "x": 60,   "y": 350, "w": 50, "h": 170 },
+        { "id": "sub2",  "kind": "fader", "label": "Sub 2",  "addressTemplate": "/eos/sub/2",  "x": 118,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub3",  "kind": "fader", "label": "Sub 3",  "addressTemplate": "/eos/sub/3",  "x": 176,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub4",  "kind": "fader", "label": "Sub 4",  "addressTemplate": "/eos/sub/4",  "x": 234,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub5",  "kind": "fader", "label": "Sub 5",  "addressTemplate": "/eos/sub/5",  "x": 292,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub6",  "kind": "fader", "label": "Sub 6",  "addressTemplate": "/eos/sub/6",  "x": 350,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub7",  "kind": "fader", "label": "Sub 7",  "addressTemplate": "/eos/sub/7",  "x": 408,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub8",  "kind": "fader", "label": "Sub 8",  "addressTemplate": "/eos/sub/8",  "x": 466,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub9",  "kind": "fader", "label": "Sub 9",  "addressTemplate": "/eos/sub/9",  "x": 524,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub10", "kind": "fader", "label": "Sub 10", "addressTemplate": "/eos/sub/10", "x": 582,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub11", "kind": "fader", "label": "Sub 11", "addressTemplate": "/eos/sub/11", "x": 640,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub12", "kind": "fader", "label": "Sub 12", "addressTemplate": "/eos/sub/12", "x": 698,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub13", "kind": "fader", "label": "Sub 13", "addressTemplate": "/eos/sub/13", "x": 756,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub14", "kind": "fader", "label": "Sub 14", "addressTemplate": "/eos/sub/14", "x": 814,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub15", "kind": "fader", "label": "Sub 15", "addressTemplate": "/eos/sub/15", "x": 872,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub16", "kind": "fader", "label": "Sub 16", "addressTemplate": "/eos/sub/16", "x": 930,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub17", "kind": "fader", "label": "Sub 17", "addressTemplate": "/eos/sub/17", "x": 988,  "y": 350, "w": 50, "h": 170 },
+        { "id": "sub18", "kind": "fader", "label": "Sub 18", "addressTemplate": "/eos/sub/18", "x": 1046, "y": 350, "w": 50, "h": 170 },
+        { "id": "sub19", "kind": "fader", "label": "Sub 19", "addressTemplate": "/eos/sub/19", "x": 1104, "y": 350, "w": 50, "h": 170 }
+      ]
+    },
+    {
+      "name": "Playback / Master",
+      "controls": [
+        { "id": "go",      "kind": "key",   "label": "Go",      "addressTemplate": "/eos/key/go_0",      "x": 800, "y": 130, "w": 80, "h": 56 },
+        { "id": "stopback","kind": "key",   "label": "Back",    "addressTemplate": "/eos/key/stop",      "x": 800, "y": 192, "w": 80, "h": 56 },
+        { "id": "macgo",   "kind": "key",   "label": "Mac Go",  "addressTemplate": "/eos/key/macro_go",  "x": 890, "y": 130, "w": 80, "h": 40 },
+        { "id": "release", "kind": "key",   "label": "Release", "addressTemplate": "/eos/key/release",   "x": 890, "y": 175, "w": 80, "h": 40 },
+        { "id": "assert",  "kind": "key",   "label": "Assert",  "addressTemplate": "/eos/key/assert",    "x": 890, "y": 220, "w": 80, "h": 40 },
+        { "id": "fader_pgUp",  "kind": "key", "label": "Pg ▲",  "addressTemplate": "/eos/key/page+",      "x": 1170, "y": 130, "w": 80, "h": 40 },
+        { "id": "fader_pgDn",  "kind": "key", "label": "Pg ▼",  "addressTemplate": "/eos/key/page-",      "x": 1170, "y": 175, "w": 80, "h": 40 },
+        { "id": "master",  "kind": "fader", "label": "GM",      "addressTemplate": "/eos/fader/1/grandmaster", "x": 1170, "y": 350, "w": 50, "h": 170 }
+      ]
+    }
+  ]
+}

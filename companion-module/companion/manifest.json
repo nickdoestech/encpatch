@@ -1,0 +1,27 @@
+{
+  "type": "connection",
+  "id": "encpatch",
+  "name": "encpatch",
+  "shortname": "ENCpatch",
+  "description": "Drive ENCpatch from a Companion surface — encoder ticks, page banks, and console command-line passthrough.",
+  "version": "0.13.42",
+  "license": "MIT",
+  "repository": "https://github.com/<your-fork>/companion-module-encpatch",
+  "bugs": "https://github.com/<your-fork>/companion-module-encpatch/issues",
+  "maintainers": [
+    {
+      "name": "ENCpatch contributors",
+      "email": "contact@example.invalid"
+    }
+  ],
+  "legacyIds": [],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "2.1.3",
+    "entrypoint": "main.js"
+  },
+  "manufacturer": "ENCpatch",
+  "products": ["ENCpatch"],
+  "keywords": ["encpatch", "grandma3", "eos", "lighting", "stream-deck"]
+}

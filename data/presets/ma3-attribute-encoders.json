@@ -1,0 +1,30 @@
+{
+  "name": "MA3 Attribute Encoders (SD+ → /cmd)",
+  "description": "Stream Deck + 4 encoders mapped to MA3 attributes via OSC /cmd. Press the encoder to toggle FINE mode (0.1) vs coarse (0.5). Override per-mapping via coarseStep/fineStep.",
+  "mappings": [
+    {
+      "name": "Enc 1 → Dimmer",
+      "trigger": { "type": "osc", "match": "/sd/enc/1" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "cmd", "template": "Attribute \"Dimmer\" At $sign $abs" }
+    },
+    {
+      "name": "Enc 2 → Pan",
+      "trigger": { "type": "osc", "match": "/sd/enc/2" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.1 },
+      "action": { "type": "cmd", "template": "Attribute \"Pan\" At $sign $abs" }
+    },
+    {
+      "name": "Enc 3 → Tilt",
+      "trigger": { "type": "osc", "match": "/sd/enc/3" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 1.0, "fineStep": 0.1 },
+      "action": { "type": "cmd", "template": "Attribute \"Tilt\" At $sign $abs" }
+    },
+    {
+      "name": "Enc 4 → Zoom",
+      "trigger": { "type": "osc", "match": "/sd/enc/4" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "cmd", "template": "Attribute \"Zoom\" At $sign $abs" }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "ma3-fader-wing",
+  "name": "grandMA3 Fader Wing (24-fader expansion)",
+  "description": "Layout for MA3 Fader Wing expansion unit with 24 motorized faders (2 rows of 12). Address scheme: /Page{N}/Fader3XX, /Page{N}/Key3XX (executors), /Page{N}/Fader3XXFlash.",
+  "viewBox": [0, 0, 1450, 320],
+  "supportsPages": true,
+  "defaultPage": 1,
+  "sections": [
+    {
+      "name": "Fader wing row 1 (execs 301-312)",
+      "controls": [
+        { "id": "key301",   "kind": "key",   "label": "301", "addressTemplate": "/Page{P}/Key301",        "x":  30, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader301", "kind": "fader", "label": "F301","addressTemplate": "/Page{P}/Fader301",      "x":  30, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash301", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader301Flash", "x":  30, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key302",   "kind": "key",   "label": "302", "addressTemplate": "/Page{P}/Key302",        "x":  78, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader302", "kind": "fader", "label": "F302","addressTemplate": "/Page{P}/Fader302",      "x":  78, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash302", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader302Flash", "x":  78, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key303",   "kind": "key",   "label": "303", "addressTemplate": "/Page{P}/Key303",        "x": 126, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader303", "kind": "fader", "label": "F303","addressTemplate": "/Page{P}/Fader303",      "x": 126, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash303", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader303Flash", "x": 126, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key304",   "kind": "key",   "label": "304", "addressTemplate": "/Page{P}/Key304",        "x": 174, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader304", "kind": "fader", "label": "F304","addressTemplate": "/Page{P}/Fader304",      "x": 174, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash304", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader304Flash", "x": 174, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key305",   "kind": "key",   "label": "305", "addressTemplate": "/Page{P}/Key305",        "x": 222, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader305", "kind": "fader", "label": "F305","addressTemplate": "/Page{P}/Fader305",      "x": 222, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash305", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader305Flash", "x": 222, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key306",   "kind": "key",   "label": "306", "addressTemplate": "/Page{P}/Key306",        "x": 270, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader306", "kind": "fader", "label": "F306","addressTemplate": "/Page{P}/Fader306",      "x": 270, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash306", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader306Flash", "x": 270, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key307",   "kind": "key",   "label": "307", "addressTemplate": "/Page{P}/Key307",        "x": 318, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader307", "kind": "fader", "label": "F307","addressTemplate": "/Page{P}/Fader307",      "x": 318, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash307", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader307Flash", "x": 318, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key308",   "kind": "key",   "label": "308", "addressTemplate": "/Page{P}/Key308",        "x": 366, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader308", "kind": "fader", "label": "F308","addressTemplate": "/Page{P}/Fader308",      "x": 366, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash308", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader308Flash", "x": 366, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key309",   "kind": "key",   "label": "309", "addressTemplate": "/Page{P}/Key309",        "x": 414, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader309", "kind": "fader", "label": "F309","addressTemplate": "/Page{P}/Fader309",      "x": 414, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash309", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader309Flash", "x": 414, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key310",   "kind": "key",   "label": "310", "addressTemplate": "/Page{P}/Key310",        "x": 462, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader310", "kind": "fader", "label": "F310","addressTemplate": "/Page{P}/Fader310",      "x": 462, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash310", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader310Flash", "x": 462, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key311",   "kind": "key",   "label": "311", "addressTemplate": "/Page{P}/Key311",        "x": 510, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader311", "kind": "fader", "label": "F311","addressTemplate": "/Page{P}/Fader311",      "x": 510, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash311", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader311Flash", "x": 510, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key312",   "kind": "key",   "label": "312", "addressTemplate": "/Page{P}/Key312",        "x": 558, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader312", "kind": "fader", "label": "F312","addressTemplate": "/Page{P}/Fader312",      "x": 558, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash312", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader312Flash", "x": 558, "y": 256, "w": 40, "h": 20 }
+      ]
+    },
+    {
+      "name": "Fader wing row 2 (execs 313-324)",
+      "controls": [
+        { "id": "key313",   "kind": "key",   "label": "313", "addressTemplate": "/Page{P}/Key313",        "x":  30, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader313", "kind": "fader", "label": "F313","addressTemplate": "/Page{P}/Fader313",      "x":  30, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash313", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader313Flash", "x":  30, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key314",   "kind": "key",   "label": "314", "addressTemplate": "/Page{P}/Key314",        "x":  78, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader314", "kind": "fader", "label": "F314","addressTemplate": "/Page{P}/Fader314",      "x":  78, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash314", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader314Flash", "x":  78, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key315",   "kind": "key",   "label": "315", "addressTemplate": "/Page{P}/Key315",        "x": 126, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader315", "kind": "fader", "label": "F315","addressTemplate": "/Page{P}/Fader315",      "x": 126, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash315", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader315Flash", "x": 126, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key316",   "kind": "key",   "label": "316", "addressTemplate": "/Page{P}/Key316",        "x": 174, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader316", "kind": "fader", "label": "F316","addressTemplate": "/Page{P}/Fader316",      "x": 174, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash316", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader316Flash", "x": 174, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key317",   "kind": "key",   "label": "317", "addressTemplate": "/Page{P}/Key317",        "x": 222, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader317", "kind": "fader", "label": "F317","addressTemplate": "/Page{P}/Fader317",      "x": 222, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash317", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader317Flash", "x": 222, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key318",   "kind": "key",   "label": "318", "addressTemplate": "/Page{P}/Key318",        "x": 270, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader318", "kind": "fader", "label": "F318","addressTemplate": "/Page{P}/Fader318",      "x": 270, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash318", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader318Flash", "x": 270, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key319",   "kind": "key",   "label": "319", "addressTemplate": "/Page{P}/Key319",        "x": 318, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader319", "kind": "fader", "label": "F319","addressTemplate": "/Page{P}/Fader319",      "x": 318, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash319", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader319Flash", "x": 318, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key320",   "kind": "key",   "label": "320", "addressTemplate": "/Page{P}/Key320",        "x": 366, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader320", "kind": "fader", "label": "F320","addressTemplate": "/Page{P}/Fader320",      "x": 366, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash320", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader320Flash", "x": 366, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key321",   "kind": "key",   "label": "321", "addressTemplate": "/Page{P}/Key321",        "x": 414, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader321", "kind": "fader", "label": "F321","addressTemplate": "/Page{P}/Fader321",      "x": 414, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash321", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader321Flash", "x": 414, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key322",   "kind": "key",   "label": "322", "addressTemplate": "/Page{P}/Key322",        "x": 462, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader322", "kind": "fader", "label": "F322","addressTemplate": "/Page{P}/Fader322",      "x": 462, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash322", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader322Flash", "x": 462, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key323",   "kind": "key",   "label": "323", "addressTemplate": "/Page{P}/Key323",        "x": 510, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader323", "kind": "fader", "label": "F323","addressTemplate": "/Page{P}/Fader323",      "x": 510, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash323", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader323Flash", "x": 510, "y": 256, "w": 40, "h": 20 },
+
+        { "id": "key324",   "kind": "key",   "label": "324", "addressTemplate": "/Page{P}/Key324",        "x": 558, "y": 20, "w": 40, "h": 24 },
+        { "id": "fader324", "kind": "fader", "label": "F324","addressTemplate": "/Page{P}/Fader324",      "x": 558, "y": 50, "w": 40, "h": 200 },
+        { "id": "flash324", "kind": "flash", "label": "FL",  "addressTemplate": "/Page{P}/Fader324Flash", "x": 558, "y": 256, "w": 40, "h": 20 }
+      ]
+    }
+  ]
+}

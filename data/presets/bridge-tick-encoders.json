@@ -1,0 +1,30 @@
+{
+  "name": "MA3 Encoders (fixture-agnostic via Lua bridge)",
+  "description": "SD+ encoders tick MA3's CURRENT encoder bar regardless of fixture/page. Requires MA3MapperBridge plugin running. Press encoder for fine mode (0.1 vs 0.5).",
+  "mappings": [
+    {
+      "name": "Encoder 1 — current bar slot 1",
+      "trigger": { "type": "osc", "match": "/sd/enc/1" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "bridgeTick", "encoder": 1 }
+    },
+    {
+      "name": "Encoder 2 — current bar slot 2",
+      "trigger": { "type": "osc", "match": "/sd/enc/2" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "bridgeTick", "encoder": 2 }
+    },
+    {
+      "name": "Encoder 3 — current bar slot 3",
+      "trigger": { "type": "osc", "match": "/sd/enc/3" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "bridgeTick", "encoder": 3 }
+    },
+    {
+      "name": "Encoder 4 — current bar slot 4",
+      "trigger": { "type": "osc", "match": "/sd/enc/4" },
+      "transform": { "mode": "cmd-tick", "coarseStep": 0.5, "fineStep": 0.1 },
+      "action": { "type": "bridgeTick", "encoder": 4 }
+    }
+  ]
+}

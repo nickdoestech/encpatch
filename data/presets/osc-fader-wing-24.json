@@ -1,0 +1,174 @@
+{
+  "name": "Generic OSC Fader Wing — 24 faders",
+  "description": "Maps 24 OSC faders (range 0..1) onto MA3 executor faders 201..224 (page 1). Works with any OSC controller that can send /wing/fader/N — TouchOSC, Lemur, Companion, X-Touch via OSC bridge, custom DIY wings. Each fader is also wired to a 'flash' button at /wing/flash/N (push to bump executor to 100%). When MA3 page 1 holds your show executors (sequences, dimmers, masters), this gives you a 24-channel virtual wing instantly.",
+  "mappings": [
+    {
+      "name": "Wing fader 1 → Exec 201",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/1" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader201", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 2 → Exec 202",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/2" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader202", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 3 → Exec 203",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/3" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader203", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 4 → Exec 204",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/4" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader204", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 5 → Exec 205",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/5" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader205", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 6 → Exec 206",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/6" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader206", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 7 → Exec 207",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/7" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader207", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 8 → Exec 208",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/8" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader208", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 9 → Exec 209",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/9" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader209", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 10 → Exec 210",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/10" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader210", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 11 → Exec 211",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/11" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader211", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 12 → Exec 212",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/12" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader212", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 13 → Exec 213",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/13" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader213", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 14 → Exec 214",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/14" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader214", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 15 → Exec 215",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/15" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader215", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 16 → Exec 216",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/16" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader216", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 17 → Exec 217",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/17" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader217", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 18 → Exec 218",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/18" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader218", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 19 → Exec 219",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/19" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader219", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 20 → Exec 220",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/20" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader220", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 21 → Exec 221",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/21" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader221", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 22 → Exec 222",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/22" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader222", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 23 → Exec 223",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/23" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader223", "argType": "f" }
+    },
+    {
+      "name": "Wing fader 24 → Exec 224",
+      "enabled": true,
+      "trigger": { "type": "osc", "match": "/wing/fader/24" },
+      "transform": { "scale": 1.0 },
+      "action": { "type": "osc", "address": "/Page1/Fader224", "argType": "f" }
+    }
+  ]
+}

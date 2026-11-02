@@ -1,0 +1,218 @@
+{
+  "name": "Page Select — Feature Banks",
+  "shortname": "Page Select",
+  "description": "Feature bank selection preset — buttons to switch encoder bar to Dimmer, Position, Color, Beam, Gobo, Focus, Shapers, Control.",
+  "version": "1.0.0",
+  "category": "Pages",
+  "type": "button",
+  "presets": [
+    {
+      "category": "Feature Banks",
+      "label": "Dimmer",
+      "bank": {
+        "style": "text",
+        "text": "Dimmer",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Dimmer",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Position",
+      "bank": {
+        "style": "text",
+        "text": "Position",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Position",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Color",
+      "bank": {
+        "style": "text",
+        "text": "Color",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Color",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Beam",
+      "bank": {
+        "style": "text",
+        "text": "Beam",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Beam",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Gobo",
+      "bank": {
+        "style": "text",
+        "text": "Gobo",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Gobo",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Focus",
+      "bank": {
+        "style": "text",
+        "text": "Focus",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Focus",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Shapers",
+      "bank": {
+        "style": "text",
+        "text": "Shapers",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Shapers",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "category": "Feature Banks",
+      "label": "Control",
+      "bank": {
+        "style": "text",
+        "text": "Control",
+        "size": "14px",
+        "color": 16777215,
+        "bgcolor": 2236962
+      },
+      "actions": [
+        {
+          "action": "setPage",
+          "options": {
+            "page": "Control",
+            "bankIdx": 1
+          }
+        }
+      ],
+      "feedbacks": [
+        {
+          "feedback": "console_connected",
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

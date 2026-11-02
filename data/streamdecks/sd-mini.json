@@ -1,0 +1,14 @@
+{
+  "id": "sd-mini",
+  "name": "Stream Deck Mini (emulator)",
+  "description": "6 keys (2 rows x 3 columns).",
+  "viewBox": [0, 0, 410, 280],
+  "controls": [
+    { "id": "k0", "kind": "key", "label": "1", "addressTemplate": "/sd/key/1", "x": 20,  "y": 20,  "w": 120, "h": 120 },
+    { "id": "k1", "kind": "key", "label": "2", "addressTemplate": "/sd/key/2", "x": 150, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k2", "kind": "key", "label": "3", "addressTemplate": "/sd/key/3", "x": 280, "y": 20,  "w": 120, "h": 120 },
+    { "id": "k3", "kind": "key", "label": "4", "addressTemplate": "/sd/key/4", "x": 20,  "y": 150, "w": 120, "h": 120 },
+    { "id": "k4", "kind": "key", "label": "5", "addressTemplate": "/sd/key/5", "x": 150, "y": 150, "w": 120, "h": 120 },
+    { "id": "k5", "kind": "key", "label": "6", "addressTemplate": "/sd/key/6", "x": 280, "y": 150, "w": 120, "h": 120 }
+  ]
+}

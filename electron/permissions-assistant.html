@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA3 Mapper — Setup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1c1c1e;
+      color: #f5f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #a1a1a6;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1a6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: #2c2c2e;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .check-icon.pending {
+      background: #5e5e60;
+      color: #f5f5f7;
+    }
+
+    .check-icon.granted {
+      background: #34c759;
+      color: white;
+    }
+
+    .check-icon.error {
+      background: #ff3b30;
+      color: white;
+    }
+
+    .check-text {
+      flex: 1;
+    }
+
+    .check-status {
+      font-size: 12px;
+      color: #a1a1a6;
+      margin-top: 4px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      margin-bottom: 8px;
+    }
+
+    .button-primary {
+      background: #0a84ff;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #0071e3;
+    }
+
+    .button-primary:active {
+      background: #0051ba;
+    }
+
+    .button-secondary {
+      background: #424245;
+      color: #f5f5f7;
+    }
+
+    .button-secondary:hover {
+      background: #515154;
+    }
+
+    .button-secondary:active {
+      background: #3e3e42;
+    }
+
+    .button-danger {
+      background: #ff3b30;
+      color: white;
+    }
+
+    .button-danger:hover {
+      background: #ff1744;
+    }
+
+    .button-danger:active {
+      background: #e91e63;
+    }
+
+    .button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #a1a1a6;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .button-row .button {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #5e5e60;
+      border-top-color: #0a84ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #5e5e60;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>MA3 Mapper Setup</h1>
+      <p>Let's configure permissions so your Stream Deck and MA3 work together.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Permissions Required</div>
+
+      <div id="inputMonitoringCheck" class="check-item">
+        <div class="check-icon pending">
+          <span class="loading"></span>
+        </div>
+        <div class="check-text">
+          Input Monitoring
+          <div class="check-status">Checking...</div>
+        </div>
+      </div>
+
+      <div id="elgatoCheck" class="check-item">
+        <div class="check-icon pending">
+          <span class="loading"></span>
+        </div>
+        <div class="check-text">
+          Elgato Stream Deck App
+          <div class="check-status">Checking...</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="actionsSection" class="section" style="display: none;">
+      <div class="section-title">Next Steps</div>
+
+      <div id="inputMonitoringAction" style="display: none;">
+        <p class="help-text">
+          MA3 Mapper needs permission to access your Stream Deck device. Click the button below to open System Preferences, then grant permission to "MA3 Mapper" under Security & Privacy > Input Monitoring.
+        </p>
+        <button class="button button-primary" onclick="openSettings()">
+          Open System Preferences
+        </button>
+        <button class="button button-secondary" onclick="checkAgain()">
+          Check Permission Again
+        </button>
+      </div>
+
+      <div id="elgatoAction" style="display: none;">
+        <p class="help-text">
+          The Elgato Stream Deck app is running and has exclusive access to your deck. MA3 Mapper can't claim the device while Elgato is running. You can either quit the app manually, or let us do it for you below.
+        </p>
+        <button class="button button-danger" onclick="killElgatoApp()">
+          Quit Elgato Stream Deck App
+        </button>
+        <p class="help-text" style="margin-top: 12px;">
+          Or manually quit the Elgato app from the menu bar, then:
+        </p>
+        <button class="button button-secondary" onclick="checkAgain()">
+          Check Again
+        </button>
+      </div>
+    </div>
+
+    <div id="readySection" class="section" style="display: none;">
+      <p class="help-text">
+        ✓ All set! Your system is ready. Click below to continue.
+      </p>
+    </div>
+
+    <div id="buttonSection" style="display: none;">
+      <div class="button-row">
+        <button class="button button-secondary" onclick="skipFlow()">
+          Skip
+        </button>
+        <button id="proceedButton" class="button button-primary" onclick="proceedFlow()" disabled>
+          Continue
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      You can reconfigure these settings later in the app's preferences.
+    </div>
+  </div>
+
+  <script>
+    let inputMonitoringGranted = false;
+    let elgatoRunning = false;
+
+    // Listen for the initial permissions check from the main process.
+    window.permissionsAPI.onPermissionsCheck((data) => {
+      inputMonitoringGranted = data.inputMonitoringGranted;
+      elgatoRunning = data.elgatoRunning;
+      updateUI();
+    });
+
+    // Listen for Elgato kill confirmation.
+    window.permissionsAPI.onElgatoKilled((success) => {
+      if (success) {
+        elgatoRunning = false;
+        updateUI();
+      } else {
+        alert(
+          'Could not quit the Elgato app. Please quit it manually from the menu bar.'
+        );
+      }
+    });
+
+    function updateUI() {
+      // Update Input Monitoring check.
+      const inputCheck = document.getElementById('inputMonitoringCheck');
+      const inputIcon = inputCheck.querySelector('.check-icon');
+      const inputStatus = inputCheck.querySelector('.check-status');
+
+      if (inputMonitoringGranted) {
+        inputIcon.className = 'check-icon granted';
+        inputIcon.innerHTML = '✓';
+        inputStatus.textContent = 'Permission granted';
+      } else {
+        inputIcon.className = 'check-icon error';
+        inputIcon.innerHTML = '!';
+        inputStatus.textContent = 'Permission required';
+      }
+
+      // Update Elgato check.
+      const elgatoCheck = document.getElementById('elgatoCheck');
+      const elgatoIcon = elgatoCheck.querySelector('.check-icon');
+      const elgatoStatus = elgatoCheck.querySelector('.check-status');
+
+      if (!elgatoRunning) {
+        elgatoIcon.className = 'check-icon granted';
+        elgatoIcon.innerHTML = '✓';
+        elgatoStatus.textContent = 'Not running';
+      } else {
+        elgatoIcon.className = 'check-icon error';
+        elgatoIcon.innerHTML = '!';
+        elgatoStatus.textContent = 'Running (blocks access)';
+      }
+
+      // Show/hide action sections.
+      document.getElementById('inputMonitoringAction').style.display =
+        inputMonitoringGranted ? 'none' : 'block';
+      document.getElementById('elgatoAction').style.display =
+        elgatoRunning ? 'block' : 'none';
+
+      // Show proceed button if all checks pass.
+      const allGood = inputMonitoringGranted && !elgatoRunning;
+      document.getElementById('actionsSection').style.display = allGood
+        ? 'none'
+        : 'block';
+      document.getElementById('readySection').style.display = allGood
+        ? 'block'
+        : 'none';
+      document.getElementById('buttonSection').style.display = 'block';
+      document.getElementById('proceedButton').disabled = !allGood;
+    }
+
+    function openSettings() {
+      window.permissionsAPI.sendAction('openSettings');
+    }
+
+    function killElgatoApp() {
+      window.permissionsAPI.sendAction('killElgato');
+    }
+
+    function checkAgain() {
+      window.permissionsAPI.sendAction('checkPermissionsAgain');
+    }
+
+    function proceedFlow() {
+      window.permissionsAPI.sendAction('proceed');
+    }
+
+    function skipFlow() {
+      window.permissionsAPI.sendAction('skip');
+    }
+
+    // Trigger initial check.
+    window.permissionsAPI.sendAction('checkPermissionsAgain');
+  </script>
+</body>
+</html>

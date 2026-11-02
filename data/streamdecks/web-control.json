@@ -1,0 +1,28 @@
+{
+  "id": "web-control",
+  "name": "Web Control (test without hardware)",
+  "description": "Virtual deck rendered in the UI. Click keys to fire trigger events; click+drag encoders to send tick deltas. Use this to validate mappings before plugging in a Stream Deck.",
+  "interactive": true,
+  "viewBox": [0, 0, 800, 480],
+  "controls": [
+    { "id": "k1", "kind": "key", "label": "K1", "addressTemplate": "/sd/key/1", "x": 30,  "y": 30,  "w": 110, "h": 110 },
+    { "id": "k2", "kind": "key", "label": "K2", "addressTemplate": "/sd/key/2", "x": 160, "y": 30,  "w": 110, "h": 110 },
+    { "id": "k3", "kind": "key", "label": "K3", "addressTemplate": "/sd/key/3", "x": 290, "y": 30,  "w": 110, "h": 110 },
+    { "id": "k4", "kind": "key", "label": "K4", "addressTemplate": "/sd/key/4", "x": 420, "y": 30,  "w": 110, "h": 110 },
+    { "id": "k5", "kind": "key", "label": "K5", "addressTemplate": "/sd/key/5", "x": 550, "y": 30,  "w": 110, "h": 110 },
+    { "id": "k6", "kind": "key", "label": "K6", "addressTemplate": "/sd/key/6", "x": 680, "y": 30,  "w": 110, "h": 110 },
+
+    { "id": "k7",  "kind": "key", "label": "K7",  "addressTemplate": "/sd/key/7",  "x": 30,  "y": 160, "w": 110, "h": 110 },
+    { "id": "k8",  "kind": "key", "label": "K8",  "addressTemplate": "/sd/key/8",  "x": 160, "y": 160, "w": 110, "h": 110 },
+    { "id": "k9",  "kind": "key", "label": "K9",  "addressTemplate": "/sd/key/9",  "x": 290, "y": 160, "w": 110, "h": 110 },
+    { "id": "k10", "kind": "key", "label": "K10", "addressTemplate": "/sd/key/10", "x": 420, "y": 160, "w": 110, "h": 110 },
+    { "id": "k11", "kind": "key", "label": "K11", "addressTemplate": "/sd/key/11", "x": 550, "y": 160, "w": 110, "h": 110 },
+    { "id": "k12", "kind": "key", "label": "K12", "addressTemplate": "/sd/key/12", "x": 680, "y": 160, "w": 110, "h": 110 },
+
+    { "id": "enc1", "kind": "encoder", "label": "Enc 1", "addressTemplate": "/sd/enc/1", "x": 60,  "y": 320, "w": 100, "h": 100 },
+    { "id": "enc2", "kind": "encoder", "label": "Enc 2", "addressTemplate": "/sd/enc/2", "x": 200, "y": 320, "w": 100, "h": 100 },
+    { "id": "enc3", "kind": "encoder", "label": "Enc 3", "addressTemplate": "/sd/enc/3", "x": 340, "y": 320, "w": 100, "h": 100 },
+    { "id": "enc4", "kind": "encoder", "label": "Enc 4", "addressTemplate": "/sd/enc/4", "x": 480, "y": 320, "w": 100, "h": 100 },
+    { "id": "enc5", "kind": "encoder", "label": "Enc 5", "addressTemplate": "/sd/enc/5", "x": 620, "y": 320, "w": 100, "h": 100 }
+  ]
+}
