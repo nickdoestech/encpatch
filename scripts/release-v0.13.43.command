@@ -27,6 +27,8 @@ REPO_DIR="$(pwd)"
 
 step() { printf '\n\033[1;33m== %s ==\033[0m\n' "$1"; }
 die()  { printf '\n\033[1;31mSTOPPED: %s\033[0m\n' "$1"; read -r -p "Press Enter to close..."; exit 1; }
+# Any unexpected failure: keep the window open so the error is readable.
+trap 'code=$?; printf "\n\033[1;31mFAILED (exit %s) — the error is right above this line. Re-running me is safe: finished steps are skipped.\033[0m\n" "$code"; read -r -p "Press Enter to close..."' ERR
 
 step "0/6 Sanity checks"
 command -v npm >/dev/null || die "npm not found — install Node.js 18+ first"
@@ -99,12 +101,21 @@ else
 fi
 
 step "4/6 Build the app (this is the slow part)"
-if [ ! -d node_modules ]; then npm install --no-audit --no-fund; fi
-npm run dist:mac
-npm run share
+if [ -f "dist/ENCpatch-$VERSION-arm64.dmg" ] && [ -f "dist/ENCpatch-$VERSION-arm64-mac.zip" ] && [ -f "dist/latest-mac.yml" ]; then
+  echo "build artifacts for $VERSION already in dist/ — skipping rebuild"
+else
+  if [ ! -d node_modules ]; then npm install --no-audit --no-fund; fi
+  npm run dist:mac
+fi
+SHARE_ZIP="$HOME/Desktop/ENCpatch-v$VERSION.zip"
+if [ -f "$SHARE_ZIP" ]; then
+  echo "share zip already on Desktop — skipping"
+else
+  echo "(If macOS asks whether Terminal may access your Desktop — click Allow.)"
+  npm run share
+fi
 
 step "5/6 GitHub release v$VERSION"
-SHARE_ZIP="$HOME/Desktop/ENCpatch-v$VERSION.zip"
 STABLE_ZIP="$(mktemp -d)/ENCpatch-macOS.zip"
 cp "$SHARE_ZIP" "$STABLE_ZIP"
 ASSETS=()
