@@ -116,6 +116,14 @@ else
 fi
 
 step "5/6 GitHub release v$VERSION"
+# Sweep up draft releases left behind by an interrupted upload (a network
+# drop mid-upload leaves an invisible draft that gh's own cleanup may
+# miss — seen 2026-11-02 when Wi-Fi died during the asset upload).
+for rid in $(gh api "repos/$OWNER/$REPO/releases" \
+               --jq ".[] | select(.draft and .tag_name==\"v$VERSION\") | .id" 2>/dev/null); do
+  gh api -X DELETE "repos/$OWNER/$REPO/releases/$rid" >/dev/null \
+    && echo "removed stale draft release ($rid) from an interrupted run"
+done
 STABLE_ZIP="$(mktemp -d)/ENCpatch-macOS.zip"
 cp "$SHARE_ZIP" "$STABLE_ZIP"
 ASSETS=()

@@ -620,3 +620,7 @@ All hw:no items drained — only hardware items left.
 
 ## 2026-10-30
 All hw:no items drained — only hardware items left. (Two hw:no items remain [blocked] on GitHub auth: Releases pipeline, product site.)
+
+## 2026-11-03
+- Done: nothing — no `[open] hw: no` items remain.
+- Notes: All hw:no items drained — only hardware items left.
